@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PetrykPyatochkin</title>
+    <title><%= t('appname') %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +10,20 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body style="background-color: mediumspringgreen;">
+
+    <header>
+      <%= render 'shared/header' %>
+    </header>
+
+    <main class="p-4"  style="background-color: mintcream;">
+      <%= render 'shared/flash_messages' %>
+      <%= yield %>
+    </main>
+
+    <footer class="bd-footer text-center">
+      <%= render 'shared/footer' %>
+    </footer>
+
   </body>
 </html>
