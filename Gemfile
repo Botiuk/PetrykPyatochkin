@@ -47,6 +47,10 @@ gem "bootsnap", require: false
 # Internationalization
 gem 'rails-i18n'
 
+# Authorization
+gem "devise", "~> 4.9"
+gem 'devise-i18n'
+
 # Styles
 gem 'dartsass-sprockets'
 gem 'bootstrap', '~> 5.3.2'

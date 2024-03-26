@@ -34,3 +34,7 @@ uk:
       worker: "Працівника успішно створено"
     update:
       worker: "Працівника успішно оновлено"
+
+  navigation:
+    login: "Ввійти"
+    logout: "Вийти"
