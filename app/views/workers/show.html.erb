@@ -1,0 +1,23 @@
+<h4><%= t('.title') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %></h4>
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-9">
+        <%= t('.roll_number') %> <%= @worker.roll_number %> <br>
+        <%= t('.passport') %> <%= @worker.passport %> <br>
+        <%= t('.date_of_birth') %> <%= @worker.date_of_birth %> <br>
+        <%= t('.place_of_birth') %> <%= @worker.place_of_birth %> <br>
+        <%= t('.home_adress') %> <%= @worker.home_adress %> <br>
+        <%= t('.date_of_hired') %> <%= @worker.date_of_hired %> <br>
+        <% if @worker.date_of_fired.present? %>
+            <%= t('.date_of_fired') %> <%= @worker.date_of_fired %> <br>
+        <% end %>
+    </div>
+    <div class="col">
+        <% unless @worker.date_of_fired.present? %>
+            <%= link_to t('button.edit'), edit_worker_path(@worker), class: "btn btn-warning" %>
+        <% else %>
+            <div class="btn btn-danger"><%= t('.fired') %></div>
+        <% end %>
+    </div>
+</div>

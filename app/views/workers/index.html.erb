@@ -1,0 +1,20 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col text-end">
+        <%= link_to t('button.add.worker'), new_worker_path, :method => :post, class: "btn btn-secondary" %>
+    </div>
+</div>
+
+<table class="table align-middle table-secondary table-striped">
+    <tr class="text-center">
+        <th style="width: 9%;"><%= t('.roll_number') %></th>
+        <th style="width: 25%;"><%= t('.last_name') %></th>
+        <th style="width: 25%;"><%= t('.first_name') %></th>
+        <th style="width: 25%;"><%= t('.middle_name') %></th>
+        <th style="width: 8%;"><%= t('button.show') %></th>
+        <th style="width: 8%;"><%= t('button.edit') %></th>
+    </tr>
+    <% @workers.each do |worker| %>
+        <%= render worker %>
+    <% end %>
+</table>

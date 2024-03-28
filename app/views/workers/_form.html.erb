@@ -1,0 +1,71 @@
+<%= form_with(model: worker) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <%= form.label :roll_number, t('.roll_number'), style: "display: block" %>
+                <%= form.number_field :roll_number, autofocus: true, class: "form-control" %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <%= form.label :last_name, t('.last_name'), style: "display: block" %>
+                <%= form.text_field :last_name, class: "form-control" %>
+            </div>
+
+            <div class="col-md-4">
+                <%= form.label :first_name, t('.first_name'), style: "display: block" %>
+                <%= form.text_field :first_name, class: "form-control" %>
+            </div>
+
+            <div class="col-md-4">
+                <%= form.label :middle_name, t('.middle_name'), style: "display: block" %>
+                <%= form.text_field :middle_name, class: "form-control" %>
+            </div>
+
+            <div class="col-md-3">
+                <%= form.label :passport, t('.passport'), style: "display: block" %>
+                <%= form.text_field :passport, class: "form-control" %>
+            </div>
+
+            <div class="col-md-2">
+                <%= form.label :date_of_birth, t('.date_of_birth'), style: "display: block" %>
+                <%= form.date_field :date_of_birth, max: 14.years.ago, class: "form-control" %>
+            </div>
+
+            <div class="col-md-7">
+                <%= form.label :place_of_birth, t('.place_of_birth'), style: "display: block" %>
+                <%= form.text_field :place_of_birth, class: "form-control" %>
+            </div>
+
+            <div class="col-12">
+                <%= form.label :home_adress, t('.home_adress'), style: "display: block" %>
+                <%= form.text_field :home_adress, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row justify-content-between">
+            <div class="col-md-2">
+                <%= form.label :date_of_hired, t('.date_of_hired'), style: "display: block" %>
+                <%= form.date_field :date_of_hired, value: form.object.date_of_hired || Date.today, min: form.object.date_of_hired || Date.today, class: "form-control" %>
+            </div>
+
+            <div class="col-md-2">
+                <%= form.label :date_of_fired, t('.date_of_fired'), style: "display: block" %>
+                <%= form.date_field :date_of_fired, min: Date.today, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="fw-bold text-danger text-end"><%= t('.date_of_fired_instruction') %></div>
+
+            <div>
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>

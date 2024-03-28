@@ -21,7 +21,7 @@ uk:
         roll_number: "Поле 'Табельний номер'"
         first_name: "Поле 'Ім'я'"
         last_name: "Поле 'Прізвище'"
-        middle_name: "Поле 'По-батькові'"
+        middle_name: "Поле 'По батькові'"
         passport: "Поле 'Паспорт'"
         date_of_birth: "Поле 'Дата народження'"
         place_of_birth: "Поле 'Місце народження'"
@@ -35,6 +35,54 @@ uk:
     update:
       worker: "Працівника успішно оновлено"
 
+  alert:
+    edit:
+      fired_worker: "Неможливо редагувати звільненого працівника"
+
   navigation:
     login: "Ввійти"
     logout: "Вийти"
+    workers: "Працівники"
+
+  button:
+    add:
+      worker: "Додати працівника"
+    show: "Детальніше"
+    edit: "Редагувати"
+    submit: "Підтвердити"
+
+  workers:
+    index:
+      title: "Працівники"
+      roll_number: "Табельний номер"
+      last_name: "Прізвище"
+      first_name: "Ім'я"
+      middle_name: "По батькові"
+    worker:
+      fired: "Звільнено"      
+    new:
+      title: "Новий працівник"
+    form:
+      roll_number: "Табельний номер:"
+      last_name: "Прізвище:"
+      first_name: "Ім'я:"
+      middle_name: "По батькові:"
+      passport: "Паспорт:"
+      date_of_birth: "Дата народження:"
+      place_of_birth: "Місце народження:"
+      home_adress: "Домашня адреса:"
+      date_of_hired: "Дата прийому на роботу:"
+      date_of_fired: "Дата звільнення: *"
+      date_of_fired_instruction: "* Заповнювати дату звільнення лише при звільненні працівника! Потім цього працівника не можна буде редагувати!"
+    edit:
+      title: "Редагувати працівника"
+    show:
+      title: "Детальніше про працівника"
+      roll_number: "Табельний номер:"
+      passport: "Паспорт:"
+      date_of_birth: "Дата народження:"
+      place_of_birth: "Місце народження:"
+      home_adress: "Домашня адреса:"
+      date_of_hired: "Дата прийому на роботу:"
+      date_of_fired: "Дата звільнення:"
+      fired: "Звільнено"  

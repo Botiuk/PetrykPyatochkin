@@ -22,6 +22,9 @@ class WorkersController < ApplicationController
     end
 
     def edit
+        if @worker.date_of_fired.present?
+            redirect_to workers_url, alert: t('alert.edit.fired_worker')
+        end
     end
 
     def update
