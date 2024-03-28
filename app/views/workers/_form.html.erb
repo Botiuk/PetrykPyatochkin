@@ -2,10 +2,15 @@
     <%= render 'shared/form_errors_messages', object: form.object %>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row">            
             <div class="col-md-3">
                 <%= form.label :roll_number, t('.roll_number'), style: "display: block" %>
                 <%= form.number_field :roll_number, autofocus: true, class: "form-control" %>
+            </div>
+            <div class="col-md-9">
+                <%= form.label :worker_photo, t('.worker_photo'), style: "display: block" %>
+                <%= cl_image_tag(worker.worker_photo.key, height: 100, crop: :scale) if worker.worker_photo.present? %>
+                <%= form.file_field :worker_photo, direct_upload: true, class: "form-control" %>
             </div>
         </div>
         <div class="row">

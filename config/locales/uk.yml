@@ -64,6 +64,7 @@ uk:
       title: "Новий працівник"
     form:
       roll_number: "Табельний номер:"
+      worker_photo: "Фото працівника:"
       last_name: "Прізвище:"
       first_name: "Ім'я:"
       middle_name: "По батькові:"
@@ -78,6 +79,7 @@ uk:
       title: "Редагувати працівника"
     show:
       title: "Детальніше про працівника"
+      photo_absent: "Фото відсутнє"
       roll_number: "Табельний номер:"
       passport: "Паспорт:"
       date_of_birth: "Дата народження:"

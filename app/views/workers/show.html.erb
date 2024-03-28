@@ -1,7 +1,13 @@
 <h4><%= t('.title') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %></h4>
 
 <div class="row">
-    <div class="col-3"></div>
+    <div class="col-3">
+        <% if @worker.worker_photo.present? %>
+            <img class="mw-100" src="<%= cloudinary_url(@worker.worker_photo.key, height: 500, crop: :scale) %>" >
+        <% else %>
+            <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
+        <% end %>
+    </div>
     <div class="col-9">
         <%= t('.roll_number') %> <%= @worker.roll_number %> <br>
         <%= t('.passport') %> <%= @worker.passport %> <br>
@@ -13,7 +19,7 @@
             <%= t('.date_of_fired') %> <%= @worker.date_of_fired %> <br>
         <% end %>
     </div>
-    <div class="col">
+    <div class="col mt-2">
         <% unless @worker.date_of_fired.present? %>
             <%= link_to t('button.edit'), edit_worker_path(@worker), class: "btn btn-warning" %>
         <% else %>
