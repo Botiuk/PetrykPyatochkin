@@ -57,6 +57,9 @@ gem 'dartsass-sprockets'
 gem 'bootstrap', '~> 5.3.2'
 gem 'jquery-rails'
 
+# Pagination
+gem 'pagy', '~> 7.0'
+
 # Generating fake data
 gem 'faker'
 
