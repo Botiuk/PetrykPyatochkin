@@ -2,7 +2,7 @@ class WorkersController < ApplicationController
     before_action :set_worker, only: %i[ show edit update ]
 
     def index
-        @workers = Worker.all
+        @pagy, @workers = pagy(Worker.all, items: 20)
     end
 
     def show

@@ -1,6 +1,6 @@
 FactoryBot.define do
     factory :worker do
-        roll_number { Faker::Alphanumeric.unique.alphanumeric(number: 10, min_alpha: 3, min_numeric: 3) }
+        roll_number { Faker::Number.unique.within(range: 1..10000) }
         last_name { Faker::Name.last_name }
         first_name { Faker::Name.first_name }
         middle_name { Faker::Name.middle_name }
