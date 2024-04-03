@@ -20,6 +20,7 @@
         <% end %>
     </div>
     <div class="col mt-2">
+        <%= link_to t('button.all.worker'), workers_path, class: "btn btn-primary" %>
         <% unless @worker.date_of_fired.present? %>
             <%= link_to t('button.edit'), edit_worker_path(@worker), class: "btn btn-warning" %>
         <% else %>
