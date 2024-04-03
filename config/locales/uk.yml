@@ -28,12 +28,18 @@ uk:
         home_adress: "Поле 'Домашня адреса'"
         date_of_hired: "Поле 'Дата прийому на роботу'"
         date_of_fired: "Поле 'Дата звільнення'"
+      position:
+        name: "Поле 'Назва посади'"
+        salary: "Поле 'Оклад'"
+        vacation_days: "Поле 'Відпустка (дні за рік)'"
 
   notice:
     create:
       worker: "Працівника успішно створено"
+      position: "Посаду успішно створено"
     update:
       worker: "Працівника успішно оновлено"
+      position: "Посаду успішно оновлено"
 
   alert:
     edit:
@@ -43,10 +49,14 @@ uk:
     login: "Ввійти"
     logout: "Вийти"
     workers: "Працівники"
+    positions: "Посади"
 
   button:
     add:
       worker: "Додати працівника"
+      position: "Додати посаду"
+    all:
+      position: "До всіх посад"
     show: "Детальніше"
     edit: "Редагувати"
     submit: "Підтвердити"
@@ -59,7 +69,7 @@ uk:
       first_name: "Ім'я"
       middle_name: "По батькові"
     worker:
-      fired: "Звільнено"      
+      fired: "Звільнено"
     new:
       title: "Новий працівник"
     form:
@@ -87,4 +97,24 @@ uk:
       home_adress: "Домашня адреса:"
       date_of_hired: "Дата прийому на роботу:"
       date_of_fired: "Дата звільнення:"
-      fired: "Звільнено"  
+      fired: "Звільнено"
+
+  positions:
+    index:
+      title: "Посади"
+      name: "Назва посади"
+      salary: "Оклад"
+      vacation_days: "Відпустка (днів за рік)"
+    new:
+      title: "Нова посада"
+    form:
+      name: "Назва посади:"
+      salary: "Оклад:"
+      vacation_days: "Відпустка (днів за рік):"
+    edit:
+      title: "Редагувати посаду"
+    show:
+      title: "Посада"
+      name: "Назва посади:"
+      salary: "Оклад:"
+      vacation_days: "Відпустка (днів за рік):"

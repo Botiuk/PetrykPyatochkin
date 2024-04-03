@@ -1,0 +1,13 @@
+<h4><%= t('.title') %></h4>
+
+<div class="row">
+    <div class="col-12">
+        <%= t('.name') %> <%= @position.name %> <br>
+        <%= t('.salary') %> <%= @position.salary %> <br>
+        <%= t('.vacation_days') %> <%= @position.vacation_days %>
+    </div>
+    <div class="col mt-2">
+        <%= link_to t('button.all.position'), positions_path, class: "btn btn-primary" %>
+        <%= link_to t('button.edit'), edit_position_path(@position), class: "btn btn-warning" %>
+    </div>
+</div>

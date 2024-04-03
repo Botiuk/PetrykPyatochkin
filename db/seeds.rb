@@ -17,3 +17,11 @@ user.update!(
         date_of_hired: Faker::Date.between(from: 1.year.ago, to: (Date.today-1))
     )
 end
+
+25.times do
+    Position.create(
+        name: Faker::Job.unique.position,
+        salary: Faker::Number.decimal(l_digits: 5, r_digits: 2),
+        vacation_days: Faker::Number.between(from: 20, to: 30)
+    )
+end

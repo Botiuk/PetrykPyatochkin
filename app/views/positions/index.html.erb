@@ -1,0 +1,25 @@
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col text-end">
+        <%= link_to t('button.add.position'), new_position_path, :method => :post, class: "btn btn-secondary" %>
+    </div>
+</div>
+
+<table class="table align-middle table-secondary table-striped">
+    <tr class="text-center">
+        <th style="width: 40%;"><%= t('.name') %></th>
+        <th style="width: 20%;"><%= t('.salary') %></th>
+        <th style="width: 20%;"><%= t('.vacation_days') %></th>
+        <th style="width: 10%;"></th>
+        <th style="width: 10%;"></th>
+    </tr>
+    <% @positions.each do |position| %>
+        <%= render position %>
+    <% end %>
+</table>
+
+<% if @pagy.pages > 1 %>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+<% end %>
