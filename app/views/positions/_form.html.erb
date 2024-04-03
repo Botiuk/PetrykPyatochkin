@@ -2,7 +2,7 @@
     <%= render 'shared/form_errors_messages', object: form.object %>
 
     <div class="container-fluid">
-        <div class="row">            
+        <div class="row">
             <div class="col-md-6">
                 <%= form.label :name, t('.name'), style: "display: block" %>
                 <%= form.text_field :name, autofocus: true, class: "form-control" %>
@@ -12,12 +12,12 @@
         <div class="row">
             <div class="col-md-3">
                 <%= form.label :salary, t('.salary'), style: "display: block" %>
-                <%= form.number_field :salary, step: 0.01, class: "form-control" %>
+                <%= form.number_field :salary, min: 0, step: 0.01, class: "form-control" %>
             </div>
 
             <div class="col-md-3">
                 <%= form.label :vacation_days, t('.vacation_days'), style: "display: block" %>
-                <%= form.number_field :vacation_days, step: 1, class: "form-control" %>
+                <%= form.number_field :vacation_days, min: 0, step: 1, class: "form-control" %>
             </div>
         </div>
 
