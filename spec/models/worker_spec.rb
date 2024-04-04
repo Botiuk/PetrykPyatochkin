@@ -93,6 +93,17 @@ RSpec.describe Worker, type: :model do
             worker = build(:worker, date_of_hired: Date.today, date_of_fired: Date.today)
             expect(worker).to be_valid
         end
-
     end
+
+    describe "association" do
+        it "has_many worker_position" do
+            worker = create(:worker)
+            first_worker_position = create(:worker_position)
+            second_worker_position = create(:worker_position)
+            worker.worker_positions << [first_worker_position, second_worker_position]
+            expect(worker.worker_positions.first).to eq(first_worker_position)
+            expect(worker.worker_positions.second).to eq(second_worker_position)
+        end
+    end
+
 end

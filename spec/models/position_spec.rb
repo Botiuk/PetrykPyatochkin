@@ -60,4 +60,15 @@ RSpec.describe Position, type: :model do
         end
     end
 
+    describe "association" do
+        it "has_many worker_position" do
+            position = create(:position)
+            first_worker_position = create(:worker_position)
+            second_worker_position = create(:worker_position)
+            position.worker_positions << [first_worker_position, second_worker_position]
+            expect(position.worker_positions.first).to eq(first_worker_position)
+            expect(position.worker_positions.second).to eq(second_worker_position)
+        end
+    end
+
 end

@@ -1,4 +1,6 @@
 class Worker < ApplicationRecord
+    has_many :worker_positions
+    
     has_one_attached :worker_photo
 
     validates :roll_number, presence: true, uniqueness: { case_sensitive: false }
