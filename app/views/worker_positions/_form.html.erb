@@ -1,0 +1,37 @@
+<%= form_with(model: worker_position) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div>
+                <%= form.hidden_field :worker_id, :value => params[:worker_id], readonly: true %>
+            </div>
+            <div class="col-md-3">
+                <%= form.label :position_id, t('.position_id'), style: "display: block" %>
+                <%= select(:worker_position, :position_id, options_for_select(@positions, :selected => form.object.position_id), {:prompt => t('.prompt'), :selected => form.object.position_id}, {:class => "form-select"}) %>
+            </div>
+        </div>
+        <div class="row justify-content-between">
+            <div class="col-md-2">
+                <%= form.label :start_date, t('.start_date'), style: "display: block" %>
+                <%= form.date_field :start_date, value: form.object.start_date || Date.today, min: form.object.start_date || Date.today, class: "form-control" %>
+            </div>
+
+            <div class="col-md-2">
+                <%= form.label :end_date, t('.end_date'), style: "display: block" %>
+                <%= form.date_field :end_date, min: Date.today, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="fw-bold text-danger text-end"><%= t('.end_date_instruction') %></div>
+
+            <div>
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>
