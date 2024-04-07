@@ -6,6 +6,7 @@ class WorkersController < ApplicationController
     end
 
     def show
+        @worker_position = WorkerPosition.where(worker_id: @worker.id).last
     end
 
     def new

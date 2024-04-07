@@ -8,15 +8,23 @@
             <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
         <% end %>
     </div>
-    <div class="col-9">
-        <%= t('.roll_number') %> <%= @worker.roll_number %> <br>
-        <%= t('.passport') %> <%= @worker.passport %> <br>
-        <%= t('.date_of_birth') %> <%= @worker.date_of_birth %> <br>
-        <%= t('.place_of_birth') %> <%= @worker.place_of_birth %> <br>
-        <%= t('.home_adress') %> <%= @worker.home_adress %> <br>
-        <%= t('.date_of_hired') %> <%= @worker.date_of_hired %> <br>
+    <div class="col-4">
+        <b><%= t('.roll_number') %></b> <%= @worker.roll_number %> <br>
+        <b><%= t('.passport') %></b> <%= @worker.passport %> <br>
+        <b><%= t('.date_of_birth') %></b> <%= @worker.date_of_birth %> <br>
+        <b><%= t('.place_of_birth') %></b> <%= @worker.place_of_birth %> <br>
+        <b><%= t('.home_adress') %></b> <%= @worker.home_adress %> <br>
+        <b><%= t('.date_of_hired') %></b> <%= @worker.date_of_hired %> <br>
         <% if @worker.date_of_fired.present? %>
-            <%= t('.date_of_fired') %> <%= @worker.date_of_fired %> <br>
+            <b><%= t('.date_of_fired') %></b> <%= @worker.date_of_fired %> <br>
+        <% end %>
+    </div>
+    <div class="col-5">
+        <b><%= t('.worker_position') %></b>
+        <% if  @worker_position.present? && @worker_position.end_date.blank? %>
+            <%= @worker_position.position.name %>   <%= link_to t('button.edit'), edit_worker_position_path(@worker_position, worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
+        <% else %>
+            <%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
         <% end %>
     </div>
     <div class="col mt-2">
