@@ -22,9 +22,9 @@
     <div class="col-5">
         <b><%= t('.worker_position') %></b>
         <% if  @worker_position.present? && @worker_position.end_date.blank? %>
-            <%= @worker_position.position.name %>   <%= link_to t('button.edit'), edit_worker_position_path(@worker_position, worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
+            <%= @worker_position.position.name %> <%= link_to t('button.edit'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-secondary btn-sm" %><br>
         <% else %>
-            <%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
+            <%= t('.worker_position_empty') %> <%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
         <% end %>
     </div>
     <div class="col mt-2">

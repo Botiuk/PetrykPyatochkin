@@ -5,12 +5,14 @@ class WorkerPositionsController < ApplicationController
     def new
         @worker_position = WorkerPosition.new
         @worker = Worker.find(params[:worker_id])
+    rescue ActiveRecord::RecordNotFound
+        redirect_to workers_url
     end
 
     def create
         @worker_position = WorkerPosition.new(worker_position_params)
         @worker = Worker.find(@worker_position.worker_id)
-        if @worker_position.save            
+        if @worker_position.save
             redirect_to worker_url(@worker), notice: t('notice.create.worker_position')
         else
             render :new, status: :unprocessable_entity
@@ -18,12 +20,11 @@ class WorkerPositionsController < ApplicationController
     end
 
     def edit
-        @worker = Worker.find(params[:worker_id])
     end
 
     def update
         @worker = Worker.find(@worker_position.worker_id)
-        if @worker_position.update(worker_position_params)            
+        if @worker_position.update(worker_position_params)
             redirect_to worker_url(@worker), notice: t('notice.update.worker_position')
         else
             render :edit, status: :unprocessable_entity

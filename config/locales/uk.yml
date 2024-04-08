@@ -105,6 +105,7 @@ uk:
       date_of_fired: "Дата звільнення:"
       fired: "Звільнено"
       worker_position: "Посада:"
+      worker_position_empty: "..."
 
   positions:
     index:
