@@ -25,3 +25,20 @@ end
         vacation_days: Faker::Number.between(from: 20, to: 30)
     )
 end
+
+300.times do
+    WorkerPosition.create(
+        worker_id: rand(1..100),
+        position_id: rand(1..25),
+        start_date: Faker::Date.between(from: 1.year.ago, to: 6.month.ago),
+        end_date: Faker::Date.between(from: 5.month.ago, to: 1.month.ago)
+    )
+end
+
+(1..100).each do |worker_id|
+    WorkerPosition.create(
+        worker_id: worker_id,
+        position_id: rand(1..25),
+        start_date: Faker::Date.between(from: 1.month.ago, to: Date.today)
+    )
+end
