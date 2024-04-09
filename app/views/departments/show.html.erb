@@ -1,0 +1,18 @@
+<h4><%= t('.title') %></h4>
+
+<div class="row">
+    <div class="col-12">
+        <%= t('.name') %> <%= @department.name %> <br>
+        <%= t('.abbreviation') %> <%= @department.abbreviation %> <br>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col md-6">
+        <%= link_to t('button.all.department'), departments_path, class: "btn btn-primary" %>
+        <%= link_to t('button.edit'), edit_department_path(@department), class: "btn btn-warning" %>
+    </div>
+    <div class="col md-6 text-end">        
+        <%= button_to t('button.delete'), @department, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger"%>
+    </div>
+</div>
