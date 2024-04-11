@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :positions, except: :destroy
   resources :worker_positions, except: [:index, :show, :destroy]
   resources :departments
+  resources :department_workers, except: [:index, :show]
 
   # Defines the root path route ("/")
   root "workers#index"

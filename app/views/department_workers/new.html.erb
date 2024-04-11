@@ -1,0 +1,11 @@
+<h4>
+    <% if @worker.present? %>
+        <%= t('.title_worker') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %>
+    <% elsif @department.present? %>
+        <%= t('.title') %> "<%= @department.name %>"
+    <% else %>
+        <%= t('.title') %>
+    <% end %>
+</h4>
+
+<%= render "form", department_worker: @department_worker %>
