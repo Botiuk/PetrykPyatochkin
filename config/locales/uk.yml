@@ -37,6 +37,12 @@ uk:
       department:
         abbreviation: "Поле 'Абревіатура відділу'"
         name: "Поле 'Назва відділу'"
+      department_worker:
+        department: "Поле 'Назва відділу'"
+        worker: "Поле 'Табельний номер працівника'"
+        statuses:
+          worker: "Працівник"
+          manager: "Керівник"
 
   notice:
     create:
@@ -44,17 +50,21 @@ uk:
       position: "Посаду успішно створено"
       worker_position: "Посада працівника успішно створена"
       department: "Відділ успішно створено"
+      department_worker: "Працівник у відділ успішно доданий"
     update:
       worker: "Працівника успішно оновлено"
       position: "Посаду успішно оновлено"
       worker_position: "Посада працівника успішно оновлена"
       department: "Відділ успішно оновлено"
+      department_worker: "Позиція працівника у відділі успішно оновлена"
     destroy:
       department: "Відділ успішно видалено"
+      department_worker: "Працівник з відділу успішно видалено"
 
   alert:
     new:
-      department: "У цьому відділі вже є 20 працівників. Перед тим як додати нового, потрібно видалити когось з теперішніх"
+      department_worker: "У цьому відділі вже є 20 працівників. Перед тим як додати нового, потрібно видалити когось з теперішніх"
+      department_worker_manager_present: "У цьому відділі вже є керівник. Перед тим як призначити нового, потрібно змінити статус або видалити з відділу попереднього керівника"
     edit:
       fired_worker: "Неможливо редагувати звільненого працівника"
 
@@ -71,15 +81,18 @@ uk:
       position: "Додати посаду"
       worker_position: "Додати посаду"
       department: "Додати відділ"
+      department_worker: "Додати працівника"
     all:
       worker: "Всі працівники"
       position: "Всі посади"
       department: "Всі відділи"
     show: "Детальніше"
+    show_worker: "Картка"
     edit: "Редагувати"
     submit: "Підтвердити"
     delete: "Видалити"
     delete_confirm: "Точно видалити? Буде видалено все, що пов'язане"
+    delete_confirm_short: "Точно видалити?"
 
   workers:
     index:
@@ -108,7 +121,7 @@ uk:
     edit:
       title: "Редагувати працівника"
     show:
-      title: "Детальніше про працівника"
+      title: "Картка працівника"
       photo_absent: "Фото відсутнє"
       roll_number: "Табельний номер:"
       passport: "Паспорт:"
@@ -120,6 +133,8 @@ uk:
       fired: "Звільнено"
       worker_position: "Посада:"
       worker_position_empty: "..."
+      department_worker: "Відділ:"
+      department_worker_empty: "..."
 
   positions:
     index:
@@ -162,10 +177,34 @@ uk:
       title: "Новий відділ"
     form:
       abbreviation: "Абревіатура відділу:"
-      name: "Назва відділу:"
+      name: "Назва відділу:"      
     edit:
       title: "Редагувати відділ"
     show:
       title: "Детальніше про відділ"
       abbreviation: "Абревіатура відділу:"
       name: "Назва відділу:"
+      department_workers_count: "Кількість працівників:"
+      manager: "Керівник:"
+      manager_empty: "..."
+      department_workers: "Працівники відділу"
+      roll_number: "Табельний номер"
+      last_name: "Прізвище"
+      first_name: "Ім'я"
+      middle_name: "По батькові"
+      fired: "Звільнено"
+      need_manager: "У відділі немає керівника!"
+
+  department_workers:
+    new:
+      title: "Новий працівник у відділі"
+      title_worker: "Новий відділ працівника"
+    form:
+      department_id: "Назва відділу:"
+      worker_id: "Табельний номер працівника:"
+      status: "Позиція у відділі:"
+      prompt:
+        department: "- виберіть відділ -"
+        worker: "- виберіть працівника -"
+    edit:
+      title: "Редагувати позицію працівника у відділі"
