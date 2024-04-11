@@ -8,6 +8,9 @@ class DepartmentsController < ApplicationController
     end
 
     def show
+        department_workers_ids = DepartmentWorker.where(department_id: @department.id).pluck(:worker_id)
+        @workers = Worker.where(id: department_workers_ids)
+        @department_manager = Worker.joins(:department_worker).where(department_worker: {department_id: @department.id, status: "manager"}).first
     end
 
     def new

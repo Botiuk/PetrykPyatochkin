@@ -1,10 +1,70 @@
-<h4><%= t('.title') %></h4>
+<div class="row mb-2">
+    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col text-end">
+        <% unless @workers.count == 20 %>
+            <%= link_to t('button.add.department_worker'), new_department_worker_path(department_id: @department.id), :method => :post, class: "btn btn-secondary" %>
+        <% end %>
+    </div>
+</div>
+
+<% unless @department_manager.present? %>
+    <div class="fw-bold text-danger text-center"><%= t('.need_manager') %></div>
+<% end %>
 
 <div class="row">
-    <div class="col-12">
-        <%= t('.name') %> <%= @department.name %> <br>
-        <%= t('.abbreviation') %> <%= @department.abbreviation %> <br>
+    <div class="col-12 fs-5">
+        <b><%= t('.name') %></b> "<%= @department.name %>" <br>
+        <b><%= t('.abbreviation') %></b> <%= @department.abbreviation %> <br>
+        <b><%= t('.department_workers_count') %></b> <%= @workers.count %> <br>
+        <b><%= t('.manager') %></b>
+        <% if @department_manager.present? %>
+            <%= @department_manager.last_name %> <%= @department_manager.first_name %> <%= @department_manager.middle_name %> <br>
+        <% else %>
+            <%= t('.manager_empty') %> <br>
+        <% end %>
     </div>
+</div>
+
+<div class="my-2">
+<h5><%= t('.department_workers') %></h5>
+    <table class="table align-middle table-secondary table-striped">
+        <tr class="text-center">
+            <th style="width: 9%;"><%= t('.roll_number') %></th>
+            <th style="width: 23%;"><%= t('.last_name') %></th>
+            <th style="width: 22%;"><%= t('.first_name') %></th>
+            <th style="width: 22%;"><%= t('.middle_name') %></th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+        </tr>
+        <% @workers.each do |worker| %>
+            <% if worker.department_worker.status == "manager"%>
+                <tr id="<%= dom_id worker %>" class="text-center fw-bold table-danger">
+            <% else %>
+                <tr id="<%= dom_id worker %>" class="text-center">
+            <% end %>
+                <td style="width: 9%;"><%= worker.roll_number %></td>
+                <td style="width: 23%;"><%= worker.last_name %></td>
+                <td style="width: 22%;"><%= worker.first_name %></td>
+                <td style="width: 22%;"><%= worker.middle_name %></td>
+                <td style="width: 8%;">
+                    <%= link_to t('button.show_worker'), worker_path(worker), class: "btn btn-info btn-sm" %>
+                </td>
+                <td style="width: 8%;">
+                    <% unless worker.date_of_fired.present? %>
+                        <% if worker.department_worker.status == "manager" || @department_manager.blank? %>
+                            <%= link_to t('button.edit'), edit_department_worker_path(worker.department_worker), class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                    <% else %>
+                        <div class="btn btn-danger btn-sm"><%= t('.fired') %></div>
+                    <% end %>
+                </td>
+                <td style="width: 8%;">
+                    <%= button_to t('button.delete'), worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%>
+                </td>
+            </tr>
+        <% end %>
+    </table>
 </div>
 
 <div class="row mt-2">
@@ -12,7 +72,7 @@
         <%= link_to t('button.all.department'), departments_path, class: "btn btn-primary" %>
         <%= link_to t('button.edit'), edit_department_path(@department), class: "btn btn-warning" %>
     </div>
-    <div class="col md-6 text-end">        
+    <div class="col md-6 text-end">
         <%= button_to t('button.delete'), @department, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger"%>
     </div>
 </div>

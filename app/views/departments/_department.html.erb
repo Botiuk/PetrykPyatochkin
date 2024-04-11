@@ -1,13 +1,12 @@
 <tr id="<%= dom_id department %>" class="text-center">
-    <td style="width: 15%;"><%= department.abbreviation %></td>
-    <td style="width: 45%;"><%= department.name %></td>
-    <td style="width: 10%;"></td>
+    <td style="width: 20%;"><%= department.abbreviation %></td>
+    <td style="width: 50%;"><%= department.name %></td>    
     <td style="width: 10%;">
         <%= link_to t('button.show'), department_path(department), class: "btn btn-info btn-sm" %>
     </td>
     <td style="width: 10%;">
         <%= link_to t('button.edit'), edit_department_path(department), class: "btn btn-warning btn-sm" %>
-    </td>    
+    </td>
     <td style="width: 10%;">
         <%= button_to t('button.delete'), department, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm"%>
     </td>
