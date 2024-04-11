@@ -7,6 +7,7 @@ class WorkersController < ApplicationController
 
     def show
         @worker_position = WorkerPosition.where(worker_id: @worker.id).last
+        @worker_department = Department.joins(:department_workers).where(department_workers: {worker_id: @worker.id}).first
     end
 
     def new
