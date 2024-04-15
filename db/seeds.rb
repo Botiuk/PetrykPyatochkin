@@ -27,7 +27,7 @@ ActiveStorage::Blob.create!(
     byte_size: 5704,
     checksum: 'Yp8xTVxnrsK16TZ6wJaPbw=='
 )
-(1..100).each.each do |worker_id|
+(1..100).each do |worker_id|
     ActiveStorage::Attachment.create!(
         record_type: 'Worker',
         record_id: worker_id,
@@ -66,4 +66,14 @@ end
         abbreviation: Faker::Alphanumeric.unique.alphanumeric(number: 4, min_alpha: 4),
         name: Faker::Company.unique.department
     )
+end
+
+(1..15).each do |department_id|
+    6.times do
+        DepartmentWorker.create(
+            worker_id: Faker::Number.unique.between(from: 1, to: 100),
+            department_id: department_id,
+            status: "worker"
+        )
+    end
 end
