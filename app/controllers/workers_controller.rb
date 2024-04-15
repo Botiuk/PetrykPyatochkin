@@ -37,6 +37,17 @@ class WorkersController < ApplicationController
         end
     end
 
+    def search
+        if params[:last_name].blank?
+          redirect_to workers_url, alert: t('alert.search.worker')
+        else
+          @pagy, @workers = pagy(Worker.where('lower(last_name) LIKE ?', "%" + params[:last_name].downcase + "%"), items: 20)
+          @search_params = params[:last_name]
+        end
+    rescue Pagy::OverflowError
+        redirect_to workers_url(page: 1)
+    end
+
     private
 
     def set_worker

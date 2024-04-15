@@ -50,4 +50,15 @@ RSpec.describe "Workers", type: :request do
     expect(flash[:notice]).to include(I18n.t('notice.update.worker'))
   end
 
+  it "GET search" do
+    get workers_search_path(last_name: "abc")
+    expect(response).to be_successful
+  end
+
+  it "GET search with empty params last_name" do
+    get workers_search_path
+    expect(response).to redirect_to(workers_url)
+    expect(flash[:alert]).to include(I18n.t('alert.search.worker'))
+  end
+
 end

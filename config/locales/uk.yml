@@ -67,6 +67,8 @@ uk:
       department_worker_manager_present: "У цьому відділі вже є керівник. Перед тим як призначити нового, потрібно змінити статус або видалити з відділу попереднього керівника"
     edit:
       fired_worker: "Неможливо редагувати звільненого працівника"
+    search:
+      worker: "Для пошуку працівника, потрібно ввести в поле хоча б одну букву з прізвища"
 
   navigation:
     login: "Ввійти"
@@ -74,6 +76,7 @@ uk:
     workers: "Працівники"
     positions: "Посади"
     departments: "Відділи"
+    search_placeholder: "- прізвище працівника -"
 
   button:
     add:
@@ -93,6 +96,7 @@ uk:
     delete: "Видалити"
     delete_confirm: "Точно видалити? Буде видалено все, що пов'язане"
     delete_confirm_short: "Точно видалити?"
+    search: "Пошук"
 
   workers:
     index:
@@ -135,6 +139,13 @@ uk:
       worker_position_empty: "..."
       department_worker: "Відділ:"
       department_worker_empty: "..."
+    search:
+      title: "Пошук працівника за прізвищем з"
+      search_empty: "Немає даних про працівників, прізвище яких співпадає з запитом"
+      roll_number: "Табельний номер"
+      last_name: "Прізвище"
+      first_name: "Ім'я"
+      middle_name: "По батькові"
 
   positions:
     index:
@@ -187,7 +198,7 @@ uk:
       department_workers_count: "Кількість працівників:"
       manager: "Керівник:"
       manager_empty: "..."
-      department_workers: "Працівники відділу"
+      department_workers: "Працівники відділу:"
       roll_number: "Табельний номер"
       last_name: "Прізвище"
       first_name: "Ім'я"

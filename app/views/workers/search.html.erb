@@ -1,0 +1,28 @@
+<h4><%= t('.title') %> "<%= @search_params %>" </h4>
+
+<% if @workers.present? %>
+    <table class="table align-middle table-secondary table-striped">
+        <tr class="text-center">
+            <th style="width: 9%;"><%= t('.roll_number') %></th>
+            <th style="width: 25%;"><%= t('.last_name') %></th>
+            <th style="width: 25%;"><%= t('.first_name') %></th>
+            <th style="width: 25%;"><%= t('.middle_name') %></th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+        </tr>
+        <% @workers.each do |worker| %>
+            <%= render worker %>
+        <% end %>
+    </table>
+<% else %>
+    <p class="fw-semibold text-danger"><%= t('.search_empty') %></p>
+<% end %>
+
+<% if @pagy.pages > 1 %>
+    <div class="d-flex justify-content-center">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+    <div class="d-flex justify-content-center">
+        <%== pagy_info(@pagy) %>
+    </div>
+<% end %>
