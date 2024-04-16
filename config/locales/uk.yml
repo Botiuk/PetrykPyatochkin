@@ -3,6 +3,12 @@ uk:
   author: "Svitlana Botiuk"
   brand_slogan: "Я порахую ваших 'слоненят'!"
 
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      long: "%e %B %Y"
+      short: "%e %b"
+
   forms:
     messages:
       errors:

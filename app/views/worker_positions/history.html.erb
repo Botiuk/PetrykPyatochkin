@@ -2,9 +2,9 @@
 
 <div class="row">
     <div class="col-12 fs-6">
-        <b><%= t('.date_of_hired') %></b> <%= @worker.date_of_hired %> <br>
+        <b><%= t('.date_of_hired') %></b> <%= I18n.l( @worker.date_of_hired, format: :long) %> <br>
         <% if @worker.date_of_fired.present? %>
-            <b><%= t('.date_of_fired') %></b> <%= @worker.date_of_fired %> <br>
+            <b><%= t('.date_of_fired') %></b> <%= I18n.l(@worker.date_of_fired, format: :long)  %> <br>
         <% end %>
     </div>
 </div>
@@ -21,13 +21,13 @@
             <% @worker_positions.each do |worker_position| %>
                 <tr id="<%= dom_id worker_position %>" class="text-center">
                     <td style="width: 30%;"><%= worker_position.position.name %></td>
-                    <td style="width: 30%;"><%= worker_position.start_date %></td>
+                    <td style="width: 30%;"><%= I18n.l(worker_position.start_date) %></td>
                     <td style="width: 30%;">
                         <% if worker_position.end_date.present? %>
-                            <%= worker_position.end_date %>                                                        
+                            <%= I18n.l(worker_position.end_date) %>                                                        
                         <% else %>
                             <% if @worker.date_of_fired.present? %>                            
-                                <%= @worker.date_of_fired %>
+                                <%= I18n.l(@worker.date_of_fired) %>
                             <% end %>
                         <% end %>
                     </td>

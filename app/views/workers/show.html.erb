@@ -11,12 +11,12 @@
     <div class="col-4">
         <b><%= t('.roll_number') %></b> <%= @worker.roll_number %> <br>
         <b><%= t('.passport') %></b> <%= @worker.passport %> <br>
-        <b><%= t('.date_of_birth') %></b> <%= @worker.date_of_birth %> <br>
+        <b><%= t('.date_of_birth') %></b> <%= I18n.l(@worker.date_of_birth, format: :long) %> <br>
         <b><%= t('.place_of_birth') %></b> <%= @worker.place_of_birth %> <br>
         <b><%= t('.home_adress') %></b> <%= @worker.home_adress %> <br>
-        <b><%= t('.date_of_hired') %></b> <%= @worker.date_of_hired %> <br>
+        <b><%= t('.date_of_hired') %></b> <%= I18n.l(@worker.date_of_hired, format: :long) %> <br>
         <% if @worker.date_of_fired.present? %>
-            <b><%= t('.date_of_fired') %></b> <%= @worker.date_of_fired %> <br>
+            <b><%= t('.date_of_fired') %></b> <%= I18n.l(@worker.date_of_fired, format: :long) %> <br>
         <% end %>
     </div>
     <div class="col-5">
