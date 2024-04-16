@@ -34,4 +34,16 @@ RSpec.describe "WorkerPositions", type: :request do
     expect(response).to redirect_to(worker_url(worker_position.worker))
     expect(flash[:notice]).to include(I18n.t('notice.update.worker_position'))
   end
+
+  it "GET history" do
+    worker = FactoryBot.create(:worker)
+    get worker_positions_history_path(worker_id: worker.id)
+    expect(response).to be_successful
+  end
+
+  it "GET history with empty params worker_id" do
+    get worker_positions_history_path
+    expect(response).to redirect_to(workers_url)
+  end
+
 end

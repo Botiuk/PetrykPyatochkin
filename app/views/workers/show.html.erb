@@ -20,15 +20,21 @@
         <% end %>
     </div>
     <div class="col-5">
-        <b><%= t('.worker_position') %></b>
-        <% if  @worker_position.present? && @worker_position.end_date.blank? %>
-            <%= @worker_position.position.name %> <%= link_to t('button.edit'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %><br>
-        <% else %>
-            <%= t('.worker_position_empty') %>
-            <% unless @worker.date_of_fired.present? %>
-                <%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br>
-            <% end %>
-        <% end %>
+        <table>
+            <tr>
+                <td><b><%= t('.worker_position') %></b></td>
+                <% if  @worker_position.present? && @worker_position.end_date.blank? && @worker.date_of_fired.blank? %>
+                    <td><%= @worker_position.position.name %></td>
+                    <td><%= link_to t('button.edit'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %></td>
+                <% else %>
+                    <td><%= t('.worker_position_empty') %></td>
+                    <% unless @worker.date_of_fired.present? %>
+                        <td><%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
+                    <% end %>
+                <% end %>
+                <td><%= link_to t('button.history'), worker_positions_history_path(worker_id: @worker.id), :method => :get, class: "btn btn-primary btn-sm" %></td>
+            </tr>
+        </table>
         <table>
             <tr>
                 <td><b><%= t('.department_worker') %></b></td>
@@ -39,7 +45,7 @@
                 <% else %>
                     <td><%= t('.department_worker_empty') %> </td>
                     <% unless @worker.date_of_fired.present? %>
-                        <td><%= link_to t('button.add.department'), new_department_worker_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %><br></td>
+                        <td><%= link_to t('button.add.department'), new_department_worker_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
                     <% end %>
                 <% end %>
             </tr>

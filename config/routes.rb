@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get 'workers/search', to: 'workers#search'
+  get 'worker_positions/history', to: 'worker_positions#history'
 
   resources :workers, except: :destroy
   resources :positions, except: :destroy

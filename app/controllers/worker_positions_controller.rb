@@ -31,6 +31,13 @@ class WorkerPositionsController < ApplicationController
         end
     end
 
+    def history
+        @worker_positions = WorkerPosition.where(worker_id: params[:worker_id]).order(:start_date)
+        @worker = Worker.find(params[:worker_id])
+    rescue ActiveRecord::RecordNotFound
+        redirect_to workers_url
+    end
+
     private
 
     def set_worker_position

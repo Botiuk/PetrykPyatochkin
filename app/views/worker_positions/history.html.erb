@@ -1,0 +1,51 @@
+<h4><%= t('.title') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %></h4>
+
+<div class="row">
+    <div class="col-12 fs-6">
+        <b><%= t('.date_of_hired') %></b> <%= @worker.date_of_hired %> <br>
+        <% if @worker.date_of_fired.present? %>
+            <b><%= t('.date_of_fired') %></b> <%= @worker.date_of_fired %> <br>
+        <% end %>
+    </div>
+</div>
+
+<% if @worker_positions.present? %>
+    <div class="my-2">
+        <table class="table align-middle table-secondary table-striped">
+            <tr class="text-center">
+                <th style="width: 30%;"><%= t('.position') %></th>
+                <th style="width: 30%;"><%= t('.start_date') %></th>
+                <th style="width: 30%;"><%= t('.end_date') %></th>
+                <th style="width: 10%;"></th>
+            </tr>
+            <% @worker_positions.each do |worker_position| %>
+                <tr id="<%= dom_id worker_position %>" class="text-center">
+                    <td style="width: 30%;"><%= worker_position.position.name %></td>
+                    <td style="width: 30%;"><%= worker_position.start_date %></td>
+                    <td style="width: 30%;">
+                        <% if worker_position.end_date.present? %>
+                            <%= worker_position.end_date %>                                                        
+                        <% else %>
+                            <% if @worker.date_of_fired.present? %>                            
+                                <%= @worker.date_of_fired %>
+                            <% end %>
+                        <% end %>
+                    </td>
+                    <td style="width: 10%;">
+                        <% if @worker.date_of_fired.blank? && worker_position.end_date.blank? %>
+                            <%= link_to t('button.edit'), edit_worker_position_path(worker_position), :method => :post, class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.history_empty') %></p>
+<% end %>
+
+<div class="row mt-2">
+    <div class="col md-6">
+        <%= link_to t('button.show_worker'), worker_path(@worker), class: "btn btn-info" %>
+    </div>
+</div>
