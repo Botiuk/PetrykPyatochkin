@@ -27,40 +27,42 @@
 
 <div class="my-2">
 <h5><%= t('.department_workers') %></h5>
-    <table class="table align-middle table-secondary table-striped">
-        <tr class="text-center">
-            <th style="width: 9%;"><%= t('.roll_number') %></th>
-            <th style="width: 23%;"><%= t('.last_name') %></th>
-            <th style="width: 22%;"><%= t('.first_name') %></th>
-            <th style="width: 22%;"><%= t('.middle_name') %></th>
-            <th style="width: 8%;"></th>
-            <th style="width: 8%;"></th>
-            <th style="width: 8%;"></th>
-        </tr>
-        <% @workers.each do |worker| %>
-            <% if worker.department_worker.status == "manager"%>
-                <tr id="<%= dom_id worker %>" class="text-center fw-bold table-danger">
-            <% else %>
-                <tr id="<%= dom_id worker %>" class="text-center">
-            <% end %>
-                <td style="width: 9%;"><%= worker.roll_number %></td>
-                <td style="width: 23%;"><%= worker.last_name %></td>
-                <td style="width: 22%;"><%= worker.first_name %></td>
-                <td style="width: 22%;"><%= worker.middle_name %></td>
-                <td style="width: 8%;">
-                    <%= link_to t('button.show_worker'), worker_path(worker), class: "btn btn-info btn-sm" %>
-                </td>
-                <td style="width: 8%;">
-                    <% if worker.department_worker.status == "manager" || @department_manager.blank? %>
-                        <%= link_to t('button.edit'), edit_department_worker_path(worker.department_worker), class: "btn btn-warning btn-sm" %>
-                    <% end %>
-                </td>
-                <td style="width: 8%;">
-                    <%= button_to t('button.delete'), worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%>
-                </td>
+    <div class="table-responsive">
+        <table class="table align-middle table-secondary table-striped">
+            <tr class="text-center">
+                <th style="width: 9%;"><%= t('.roll_number') %></th>
+                <th style="width: 23%;"><%= t('.last_name') %></th>
+                <th style="width: 22%;"><%= t('.first_name') %></th>
+                <th style="width: 22%;"><%= t('.middle_name') %></th>
+                <th style="width: 8%;"></th>
+                <th style="width: 8%;"></th>
+                <th style="width: 8%;"></th>
             </tr>
-        <% end %>
-    </table>
+            <% @workers.each do |worker| %>
+                <% if worker.department_worker.status == "manager"%>
+                    <tr id="<%= dom_id worker %>" class="text-center fw-bold table-danger">
+                <% else %>
+                    <tr id="<%= dom_id worker %>" class="text-center">
+                <% end %>
+                    <td style="width: 9%;"><%= worker.roll_number %></td>
+                    <td style="width: 23%;"><%= worker.last_name %></td>
+                    <td style="width: 22%;"><%= worker.first_name %></td>
+                    <td style="width: 22%;"><%= worker.middle_name %></td>
+                    <td style="width: 8%;">
+                        <%= link_to t('button.show_worker'), worker_path(worker), class: "btn btn-info btn-sm" %>
+                    </td>
+                    <td style="width: 8%;">
+                        <% if worker.department_worker.status == "manager" || @department_manager.blank? %>
+                            <%= link_to t('button.edit'), edit_department_worker_path(worker.department_worker), class: "btn btn-warning btn-sm" %>
+                        <% end %>
+                    </td>
+                    <td style="width: 8%;">
+                        <%= button_to t('button.delete'), worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
 </div>
 
 <div class="row mt-2">

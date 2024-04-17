@@ -2,9 +2,9 @@
 
 <div class="row">
     <div class="col-12">
-        <%= t('.name') %> <%= @position.name %> <br>
-        <%= t('.salary') %> <%= @position.salary %> <br>
-        <%= t('.vacation_days') %> <%= @position.vacation_days %>
+        <b><%= t('.name') %></b> <%= @position.name %> <br>
+        <b><%= t('.salary') %></b> <%= @position.salary %> <br>
+        <b><%= t('.vacation_days') %></b> <%= @position.vacation_days %>
     </div>
     <div class="col mt-2">
         <%= link_to t('button.all.position'), positions_path, class: "btn btn-primary" %>

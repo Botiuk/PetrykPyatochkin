@@ -5,20 +5,22 @@
     </div>
 </div>
 
-<table class="table align-middle table-secondary table-striped">
-    <tr class="text-center">
-        <th style="width: 8%;"><%= t('.abbreviation') %></th>
-        <th style="width: 30%;"><%= t('.name') %></th>
-        <th style="width: 30%;"><%= t('.manager') %></th>
-        <th style="width: 8%;"><%= t('.count') %></th>
-        <th style="width: 8%;"></th>
-        <th style="width: 8%;"></th>
-        <th style="width: 8%;"></th>
-    </tr>
-    <% @departments.each do |department| %>
-        <%= render department %>
-    <% end %>
-</table>
+<div class="table-responsive">
+    <table class="table align-middle table-secondary table-striped">
+        <tr class="text-center">
+            <th style="width: 8%;"><%= t('.abbreviation') %></th>
+            <th style="width: 30%;"><%= t('.name') %></th>
+            <th style="width: 30%;"><%= t('.manager') %></th>
+            <th style="width: 8%;"><%= t('.count') %></th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+            <th style="width: 8%;"></th>
+        </tr>
+        <% @departments.each do |department| %>
+            <%= render department %>
+        <% end %>
+    </table>
+</div>
 
 <% if @pagy.pages > 1 %>
     <div class="d-flex justify-content-center">

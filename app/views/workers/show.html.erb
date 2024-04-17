@@ -20,43 +20,47 @@
         <% end %>
     </div>
     <div class="col-md-5">
-        <table>
-            <tr>
-                <td><b><%= t('.worker_position') %></b></td>
-                <% if  @worker_position.present? && @worker_position.end_date.blank? && @worker.date_of_fired.blank? %>
-                    <td class="px-2"><%= @worker_position.position.name %></td>
-                    <td><%= link_to t('button.change'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %></td>
-                <% else %>
-                    <td class="px-2"><%= t('.worker_position_empty') %></td>
-                    <% unless @worker.date_of_fired.present? %>
-                        <td><%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
-                    <% end %>
-                <% end %>
-                <td><%= link_to t('button.history'), worker_positions_history_path(worker_id: @worker.id), :method => :get, class: "btn btn-primary btn-sm" %></td>
-            </tr>
-            <% unless @worker.date_of_fired.present? || @worker_position.blank? || @worker_position.end_date.present? %>
-                <tr>
-                    <td colspan="3"><b><%= t('.salary') %></b> <%= @salary %> <%= t('number.currency.format.unit') %></td>
-                </tr>
-                <tr>
-                    <td colspan="3"><b><%= t('.worker_salary') %></b> <%= @worker_salary %> <%= t('number.currency.format.unit') %></td>
-                </tr>
-            <% end %>
-        </table>
-        <% unless @worker.date_of_fired.present? %>
+        <div class="table-responsive">
             <table>
                 <tr>
-                    <td><b><%= t('.department_worker') %></b></td>
-                    <% if  @worker_department.present? %>
-                        <td class="px-2"><%= @worker_department.name %></td>
-                        <td><%= link_to t('button.show'), department_path(@worker_department), class: "btn btn-info btn-sm" %></td>
-                        <td><%= button_to t('button.delete'), @worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%></td>
+                    <td><b><%= t('.worker_position') %></b></td>
+                    <% if  @worker_position.present? && @worker_position.end_date.blank? && @worker.date_of_fired.blank? %>
+                        <td class="px-2"><%= @worker_position.position.name %></td>
+                        <td><%= link_to t('button.change'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %></td>
                     <% else %>
-                        <td class="px-2"><%= t('.department_worker_empty') %> </td>
-                        <td><%= link_to t('button.add.department'), new_department_worker_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
+                        <td class="px-2"><%= t('.worker_position_empty') %></td>
+                        <% unless @worker.date_of_fired.present? %>
+                            <td><%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
+                        <% end %>
                     <% end %>
+                    <td><%= link_to t('button.history'), worker_positions_history_path(worker_id: @worker.id), :method => :get, class: "btn btn-primary btn-sm" %></td>
                 </tr>
+                <% unless @worker.date_of_fired.present? || @worker_position.blank? || @worker_position.end_date.present? %>
+                    <tr>
+                        <td colspan="3"><b><%= t('.salary') %></b> <%= @salary %> <%= t('number.currency.format.unit') %></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><b><%= t('.worker_salary') %></b> <%= @worker_salary %> <%= t('number.currency.format.unit') %></td>
+                    </tr>
+                <% end %>
             </table>
+        </div>
+        <% unless @worker.date_of_fired.present? %>
+            <div class="table-responsive">
+                <table>
+                    <tr>
+                        <td><b><%= t('.department_worker') %></b></td>
+                        <% if  @worker_department.present? %>
+                            <td class="px-2"><%= @worker_department.name %></td>
+                            <td><%= link_to t('button.show'), department_path(@worker_department), class: "btn btn-info btn-sm" %></td>
+                            <td><%= button_to t('button.delete'), @worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%></td>
+                        <% else %>
+                            <td class="px-2"><%= t('.department_worker_empty') %> </td>
+                            <td><%= link_to t('button.add.department'), new_department_worker_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
+                        <% end %>
+                    </tr>
+                </table>
+            </div>
         <% end %>
     </div>
     <div class="col mt-2">
