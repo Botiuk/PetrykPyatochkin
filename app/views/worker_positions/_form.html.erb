@@ -6,27 +6,31 @@
             <div>
                 <%= form.hidden_field :worker_id, value: form.object.worker_id || params[:worker_id], readonly: true %>
             </div>
-            <div class="col-md-3">
-                <%= form.label :position_id, t('.position_id'), style: "display: block" %>
-                <%= select(:worker_position, :position_id, options_for_select(@positions, :selected => form.object.position_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
-            </div>
+            <% unless form.object.position_id.present? %>
+                <div class="col-md-3">
+                    <%= form.label :position_id, t('.position_id'), style: "display: block" %>
+                    <%= select(:worker_position, :position_id, options_for_select(@positions, :selected => form.object.position_id), {:prompt => t('.prompt')}, {:class => "form-select"}) %>
+                </div>
+            <% end %>
         </div>
-        <div class="row justify-content-between">
-            <div class="col-md-2">
-                <%= form.label :start_date, t('.start_date'), style: "display: block" %>
-                <%= form.date_field :start_date, value: form.object.start_date || Date.today, min: form.object.start_date || Date.today, class: "form-control" %>
-            </div>
+        <div class="row">
+            <% unless form.object.start_date.present? %>
+                <div class="col-md-2">
+                    <%= form.label :start_date, t('.start_date'), style: "display: block" %>
+                    <%= form.date_field :start_date, value: form.object.start_date || Date.today, min: form.object.start_date || Date.today, class: "form-control" %>
+                </div>
+            <% end %>
 
-            <div class="col-md-2">
-                <%= form.label :end_date, t('.end_date'), style: "display: block" %>
-                <%= form.date_field :end_date, min: Date.today, class: "form-control" %>
-            </div>
+            <% if form.object.start_date.present? %>
+                <div class="col-md-2">
+                    <%= form.label :end_date, t('.end_date'), style: "display: block" %>
+                    <%= form.date_field :end_date, min: Date.today, class: "form-control" %>
+                </div>
+            <% end %>
         </div>
 
         <div class="row">
-            <div class="fw-bold text-danger text-end"><%= t('.end_date_instruction') %></div>
-
-            <div>
+            <div class="mt-2">
                 <%= form.button nil, class: "btn btn-success" do %>
                     <%= t('button.submit') %>
                 <% end %>

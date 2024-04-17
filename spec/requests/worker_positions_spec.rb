@@ -16,9 +16,17 @@ RSpec.describe "WorkerPositions", type: :request do
     worker = FactoryBot.create(:worker)
     position = FactoryBot.create(:position)
     post worker_positions_path, params: { worker_position: FactoryBot.attributes_for(:worker_position, worker_id: worker.id, position_id: position.id) }
-    expect(response).to be_redirect
-    follow_redirect!
+    expect(response).to redirect_to(new_department_worker_url(worker_id: worker.id))
     expect(flash[:notice]).to include(I18n.t('notice.create.worker_position'))
+  end
+
+  it "POST create when worker has department_worker" do
+    worker = FactoryBot.create(:worker)
+    position = FactoryBot.create(:position)
+    department_worker = FactoryBot.create(:department_worker, worker: worker)
+    post worker_positions_path, params: { worker_position: FactoryBot.attributes_for(:worker_position, worker_id: worker.id, position_id: position.id) }
+    expect(response).to redirect_to(worker_url(worker))
+    expect(flash[:notice]).to include(I18n.t('notice.create.worker_position_change'))
   end
 
   it "GET edit" do
@@ -29,9 +37,16 @@ RSpec.describe "WorkerPositions", type: :request do
 
   it "PUT update" do
     worker_position = FactoryBot.create(:worker_position)
+    put worker_position_path(worker_position), params: { worker_position: {worker_id: worker_position.worker.id} }
+    expect(response).to redirect_to(edit_worker_position_url(worker_position))
+    expect(flash[:alert]).to include(I18n.t('alert.edit.end_date'))
+  end
+
+  it "PUT update with end_date" do
+    worker_position = FactoryBot.create(:worker_position)
     put worker_position_path(worker_position), params: { worker_position: {end_date: Date.today} }
     expect(worker_position.reload.end_date).to eq(Date.today)
-    expect(response).to redirect_to(worker_url(worker_position.worker))
+    expect(response).to redirect_to(new_worker_position_url(worker_id: worker_position.worker.id))
     expect(flash[:notice]).to include(I18n.t('notice.update.worker_position'))
   end
 

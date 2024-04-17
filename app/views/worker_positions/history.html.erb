@@ -33,7 +33,7 @@
                     </td>
                     <td style="width: 10%;">
                         <% if @worker.date_of_fired.blank? && worker_position.end_date.blank? %>
-                            <%= link_to t('button.edit'), edit_worker_position_path(worker_position), :method => :post, class: "btn btn-warning btn-sm" %>
+                            <%= link_to t('button.change'), edit_worker_position_path(worker_position), :method => :post, class: "btn btn-warning btn-sm" %>
                         <% end %>
                     </td>
                 </tr>

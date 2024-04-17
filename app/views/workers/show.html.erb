@@ -1,14 +1,14 @@
 <h4><%= t('.title') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %></h4>
 
 <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
         <% if @worker.worker_photo.present? %>
             <img class="mw-100" src="<%= cloudinary_url(@worker.worker_photo.key, height: 500, crop: :scale) %>" >
         <% else %>
             <div class="text-center bg-secondary text-white"><br><br><br><%= t('.photo_absent') %><br><br><br><br></div>
         <% end %>
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <b><%= t('.roll_number') %></b> <%= @worker.roll_number %> <br>
         <b><%= t('.passport') %></b> <%= @worker.passport %> <br>
         <b><%= t('.date_of_birth') %></b> <%= I18n.l(@worker.date_of_birth, format: :long) %> <br>
@@ -19,15 +19,15 @@
             <b><%= t('.date_of_fired') %></b> <%= I18n.l(@worker.date_of_fired, format: :long) %> <br>
         <% end %>
     </div>
-    <div class="col-5">
+    <div class="col-md-5">
         <table>
             <tr>
                 <td><b><%= t('.worker_position') %></b></td>
                 <% if  @worker_position.present? && @worker_position.end_date.blank? && @worker.date_of_fired.blank? %>
-                    <td><%= @worker_position.position.name %></td>
-                    <td><%= link_to t('button.edit'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %></td>
+                    <td class="px-2"><%= @worker_position.position.name %></td>
+                    <td><%= link_to t('button.change'), edit_worker_position_path(@worker_position), :method => :post, class: "btn btn-warning btn-sm" %></td>
                 <% else %>
-                    <td><%= t('.worker_position_empty') %></td>
+                    <td class="px-2"><%= t('.worker_position_empty') %></td>
                     <% unless @worker.date_of_fired.present? %>
                         <td><%= link_to t('button.add.worker_position'), new_worker_position_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
                     <% end %>
@@ -39,11 +39,11 @@
             <tr>
                 <td><b><%= t('.department_worker') %></b></td>
                 <% if  @worker_department.present? %>
-                    <td><%= @worker_department.name %></td>
+                    <td class="px-2"><%= @worker_department.name %></td>
                     <td><%= link_to t('button.show'), department_path(@worker_department), class: "btn btn-info btn-sm" %></td>
                     <td><%= button_to t('button.delete'), @worker.department_worker, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%></td>
                 <% else %>
-                    <td><%= t('.department_worker_empty') %> </td>
+                    <td class="px-2"><%= t('.department_worker_empty') %> </td>
                     <% unless @worker.date_of_fired.present? %>
                         <td><%= link_to t('button.add.department'), new_department_worker_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
                     <% end %>

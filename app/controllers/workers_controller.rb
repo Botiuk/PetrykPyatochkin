@@ -17,7 +17,7 @@ class WorkersController < ApplicationController
     def create
         @worker = Worker.new(worker_params)
         if @worker.save
-            redirect_to worker_url(@worker), notice: t('notice.create.worker')
+            redirect_to new_worker_position_url(worker_id: @worker.id), notice: t('notice.create.worker')
         else
             render :new, status: :unprocessable_entity
         end
@@ -31,7 +31,13 @@ class WorkersController < ApplicationController
 
     def update
         if @worker.update(worker_params)
-            redirect_to worker_url(@worker), notice: t('notice.update.worker')
+            if @worker.date_of_fired.present?
+                department_worker = DepartmentWorker.where(worker_id: @worker.id).first
+                department_worker.destroy if department_worker.present?
+                redirect_to worker_url(@worker), notice: t('notice.update.worker_fired')
+            else
+                redirect_to worker_url(@worker), notice: t('notice.update.worker')
+            end            
         else
             render :edit, status: :unprocessable_entity
         end

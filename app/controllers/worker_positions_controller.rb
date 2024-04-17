@@ -13,7 +13,12 @@ class WorkerPositionsController < ApplicationController
         @worker_position = WorkerPosition.new(worker_position_params)
         @worker = Worker.find(@worker_position.worker_id)
         if @worker_position.save
-            redirect_to worker_url(@worker), notice: t('notice.create.worker_position')
+            department_worker = DepartmentWorker.where(worker_id: @worker.id).first
+            if department_worker.present?
+                redirect_to worker_url(@worker), notice: t('notice.create.worker_position_change')
+            else
+                redirect_to new_department_worker_url(worker_id: @worker.id), notice: t('notice.create.worker_position')
+            end
         else
             render :new, status: :unprocessable_entity
         end
@@ -25,7 +30,11 @@ class WorkerPositionsController < ApplicationController
     def update
         @worker = Worker.find(@worker_position.worker_id)
         if @worker_position.update(worker_position_params)
-            redirect_to worker_url(@worker), notice: t('notice.update.worker_position')
+            if @worker_position.end_date.present?
+                redirect_to new_worker_position_url(worker_id: @worker.id), notice: t('notice.update.worker_position')
+            else
+                redirect_to edit_worker_position_url(@worker_position), alert: t('alert.edit.end_date')
+            end
         else
             render :edit, status: :unprocessable_entity
         end

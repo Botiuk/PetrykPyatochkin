@@ -50,6 +50,14 @@ RSpec.describe "Workers", type: :request do
     expect(flash[:notice]).to include(I18n.t('notice.update.worker'))
   end
 
+  it "PUT update when worker fired" do
+    worker = FactoryBot.create(:worker, last_name: "Smith")
+    put worker_path(worker), params: { worker: {date_of_fired: Date.today} }
+    expect(worker.reload.date_of_fired).to eq(Date.today)
+    expect(response).to redirect_to(worker_url(worker))
+    expect(flash[:notice]).to include(I18n.t('notice.update.worker_fired'))
+  end
+
   it "GET search" do
     get workers_search_path(last_name: "abc")
     expect(response).to be_successful

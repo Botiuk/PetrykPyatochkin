@@ -38,7 +38,7 @@ RSpec.describe "DepartmentWorkers", type: :request do
       department_worker = FactoryBot.create(:department_worker, department_id: department.id)
     end
     post department_workers_path, params: { department_worker: FactoryBot.attributes_for(:department_worker, worker_id: worker.id, department_id: department.id) }
-    expect(response).to redirect_to(department_url(department))
+    expect(response).to redirect_to(new_department_worker_url(worker_id: worker.id, department_id: department.id, status: "worker"))
     expect(flash[:alert]).to include(I18n.t('alert.new.department_worker'))
   end
 
@@ -47,7 +47,7 @@ RSpec.describe "DepartmentWorkers", type: :request do
     department = FactoryBot.create(:department)
     department_worker = FactoryBot.create(:department_worker, department_id: department.id, status: "manager")
     post department_workers_path, params: { department_worker: FactoryBot.attributes_for(:department_worker, worker_id: worker.id, department_id: department.id, status: "manager") }
-    expect(response).to redirect_to(new_department_worker_path(worker_id: worker.id, department_id: department.id, status: "manager"))
+    expect(response).to redirect_to(new_department_worker_url(worker_id: worker.id, department_id: department.id, status: "manager"))
     expect(flash[:alert]).to include(I18n.t('alert.new.department_worker_manager_present'))
   end
 

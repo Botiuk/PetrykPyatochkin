@@ -20,7 +20,7 @@ class DepartmentWorkersController < ApplicationController
                     render :new, status: :unprocessable_entity
                 end
             else
-                redirect_to department_url(@department_worker.department), alert: t('alert.new.department_worker')
+                redirect_to new_department_worker_path(department_worker_params), alert: t('alert.new.department_worker')
             end
         else
             redirect_to new_department_worker_path(department_worker_params), alert: t('alert.new.department_worker_manager_present')
