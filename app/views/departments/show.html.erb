@@ -14,14 +14,14 @@
 <div class="row">
     <div class="col-12 fs-5">
         <b><%= t('.name') %></b> "<%= @department.name %>" <br>
-        <b><%= t('.abbreviation') %></b> <%= @department.abbreviation %> <br>
-        <b><%= t('.department_workers_count') %></b> <%= @workers.count %> <br>
+        <b><%= t('.abbreviation') %></b> "<%= @department.abbreviation %>" <br>
         <b><%= t('.manager') %></b>
         <% if @department_manager.present? %>
             <%= @department_manager.last_name %> <%= @department_manager.first_name %> <%= @department_manager.middle_name %> <br>
         <% else %>
             <%= t('.manager_empty') %> <br>
         <% end %>
+        <b><%= t('.department_workers_count') %></b> <%= @workers.count %> <br>        
     </div>
 </div>
 

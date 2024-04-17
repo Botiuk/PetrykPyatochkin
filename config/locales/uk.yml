@@ -203,6 +203,10 @@ uk:
       title: "Відділи"
       name: "Назва"
       abbreviation: "Абревіатура"
+      manager: "Керівник"      
+      count: "Кількість працівників"
+    department:
+      manager_empty: "немає керівника"
     new:
       title: "Новий відділ"
     form:

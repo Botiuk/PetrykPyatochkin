@@ -1,13 +1,27 @@
 <tr id="<%= dom_id department %>" class="text-center">
-    <td style="width: 20%;"><%= department.abbreviation %></td>
-    <td style="width: 50%;"><%= department.name %></td>    
-    <td style="width: 10%;">
+    <td style="width: 8%;"><%= department.abbreviation %></td>
+    <td style="width: 30%;"><%= department.name %></td>
+    <td style="width: 30%;">
+        <% if @department_workers_managers.has_key?(department.id) %>    
+                <%= @department_workers_managers.values_at(department.id).join %>
+            <% else %>
+                <b class="text-danger"><%= t('.manager_empty') %></b>
+        <% end %>
+    </td>
+    <td style="width: 8%;">
+        <% if @department_workers_count.has_key?(department.id) %>    
+            <%= @department_workers_count.values_at(department.id).join %>
+        <% else %>
+            0
+        <% end %>
+    </td>  
+    <td style="width: 8%;">
         <%= link_to t('button.show'), department_path(department), class: "btn btn-info btn-sm" %>
     </td>
-    <td style="width: 10%;">
+    <td style="width: 8%;">
         <%= link_to t('button.edit'), edit_department_path(department), class: "btn btn-warning btn-sm" %>
     </td>
-    <td style="width: 10%;">
+    <td style="width: 8%;">
         <%= button_to t('button.delete'), department, method: :delete, data: { turbo_confirm: t('button.delete_confirm') }, class: "btn btn-danger btn-sm"%>
     </td>
 </tr>

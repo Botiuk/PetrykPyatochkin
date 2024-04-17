@@ -15,4 +15,14 @@ class Worker < ApplicationRecord
 
     default_scope { order(:last_name, :first_name, :middle_name, :date_of_birth) }
 
+    private
+
+    def self.find_departments_managers
+        managers = DepartmentWorker.where(status: "manager").pluck(:department_id, :worker_id)
+        managers.map do |element|
+            element[1] = Worker.where(id: element[1]).pluck(:last_name, :first_name, :middle_name).join(" ")
+        end
+        managers.to_h
+    end
+
 end

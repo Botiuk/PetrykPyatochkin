@@ -3,6 +3,8 @@ class DepartmentsController < ApplicationController
 
     def index
         @pagy, @departments = pagy(Department.all.order(:name), items: 20)
+        @department_workers_count = DepartmentWorker.all.group(:department_id).count        
+        @department_workers_managers = Worker.find_departments_managers
     rescue Pagy::OverflowError
         redirect_to departments_url(page: 1)
     end
