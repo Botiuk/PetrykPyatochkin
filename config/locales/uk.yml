@@ -148,6 +148,8 @@ uk:
       fired: "Звільнено"
       worker_position: "Посада:"
       worker_position_empty: "..."
+      salary: "Оклад:"
+      worker_salary: "Зарплата:"
       department_worker: "Відділ:"
       department_worker_empty: "..."
     search:

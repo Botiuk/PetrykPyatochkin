@@ -8,6 +8,10 @@ class WorkersController < ApplicationController
     def show
         @worker_position = WorkerPosition.where(worker_id: @worker.id).last
         @worker_department = Department.joins(:department_workers).where(department_workers: {worker_id: @worker.id}).first
+        unless @worker.date_of_fired.present? || @worker_position.blank? || @worker_position.end_date.present?
+            @salary = Position.where(id: @worker_position.position_id).pluck(:salary).join.to_f
+            @worker_salary =  (@salary * (1.012 ** ((Date.today - @worker.date_of_hired) / 365).floor)).round(2)
+        end
     end
 
     def new
