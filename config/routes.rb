@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  get 'main/index', to: 'main#index'
   get 'workers/search', to: 'workers#search'
-  get 'worker_positions/history', to: 'worker_positions#history'
+  get 'worker_positions/history', to: 'worker_positions#history'  
 
   resources :workers, except: :destroy
   resources :positions, except: :destroy
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   resources :department_workers, except: [:index, :show]
 
   # Defines the root path route ("/")
-  root "workers#index"
+  root "main#index"
 
   match '*unmatched', to: 'application#page_not_found', via: :all
 end

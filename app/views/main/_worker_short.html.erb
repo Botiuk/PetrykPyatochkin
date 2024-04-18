@@ -1,0 +1,17 @@
+<div id="<%= dom_id worker %>">
+    <div class="row">
+        <div class="col-6 text-center">
+            <% if worker.worker_photo.present? %>
+                <%= cl_image_tag(worker.worker_photo.key, height: 100, crop: :scale) %>
+            <% else %>
+                <div class="text-center bg-secondary text-white"><br><%= t('.photo_absent') %><br><br></div>
+            <% end %>
+        </div>
+        <div class="col-6">
+            <%= worker.last_name %><br>
+            <%= worker.first_name %><br>
+            <%= worker.middle_name %><br>
+            <%= link_to t('button.show_worker'), worker_path(worker), class: "btn btn-info btn-sm" %>
+        </div>
+    </div>
+</div>

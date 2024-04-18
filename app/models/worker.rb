@@ -25,4 +25,12 @@ class Worker < ApplicationRecord
         managers.to_h
     end
 
+    def self.birthday
+        Worker.where('EXTRACT(month FROM date_of_birth) = ? AND EXTRACT(day FROM date_of_birth) = ?', Date.today.month, Date.today.day).where(date_of_fired: [nil, ""])
+    end
+
+    def self.anniversary
+        Worker.where('EXTRACT(month FROM date_of_hired) = ? AND EXTRACT(day FROM date_of_hired) = ?', Date.today.month, Date.today.day).where(date_of_fired: [nil, ""]).where.not(date_of_hired: Date.today)
+    end
+
 end

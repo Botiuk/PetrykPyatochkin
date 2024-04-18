@@ -1,0 +1,63 @@
+<% if user_signed_in? %>
+    <% if @departments_without_managers.present? %>
+        <div class="row">
+            <div class="col-12 text-center text-danger"><h5><%= t('.department_without_manager') %></h5></div>
+            <% @departments_without_managers.each do |department_without_manager| %>
+                <div id="<%= dom_id department_without_manager %>" class="col-sm-3 p-1">
+                    <div class="card text-bg-light">
+                        <div class="card-body">
+                            <%= department_without_manager.name %>
+                            <%= link_to t('button.show'), department_path(department_without_manager), class: "btn btn-info btn-sm" %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+
+    <div class="row">
+        <h5><%= t('.birthday') %></h5>
+        <% if @birthday_workers.present? %>
+            <% @birthday_workers.each do |birthday_worker| %>
+                <div class="col-sm-3 p-1">
+                    <div class="card text-bg-light">
+                        <div class="card-body">
+                            <div class="text-end text-danger fw-bold">
+                                <%= Date.today.year - birthday_worker.date_of_birth.year %> <%= t('.years') %>
+                            </div>
+                            <%= render 'worker_short', worker: birthday_worker %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% else %>
+            <h6><%= t('.birthday_empty') %></h6>
+        <% end %>
+    </div>
+
+    <div class="row">
+        <h5><%= t('.anniversary') %></h5>
+        <% if @anniversary_workers.present? %>
+            <% @anniversary_workers.each do |anniversary_worker| %>
+                <div class="col-sm-3 p-1">
+                    <div class="card text-bg-light">
+                        <div class="card-body">
+                            <div class="text-end text-danger fw-bold">
+                                <%= Date.today.year - anniversary_worker.date_of_hired.year %> <%= t('.years') %>
+                            </div>
+                            <%= render 'worker_short', worker: anniversary_worker %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% else %>
+            <h6><%= t('.anniversary_empty') %></h6>
+        <% end %>
+    </div>
+<% else %>
+    <div class="container">
+        <h4 class="text-center"><%= t('.hello') %></h4>
+        <%= t('.hello_text_html') %>
+        <h6 class="text-center"><%= t('brand_slogan') %></h6>
+    </div>
+<% end %>
