@@ -2,6 +2,7 @@ class Worker < ApplicationRecord
     has_many :worker_positions
     has_one :department_worker
     has_one :department, through: :department_worker
+    has_many :positions, through: :worker_positions
     
     has_one_attached :worker_photo
 
