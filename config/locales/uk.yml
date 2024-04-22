@@ -49,6 +49,10 @@ uk:
         statuses:
           worker: "Працівник"
           manager: "Керівник"
+      vacation:
+        worker: "Поле 'Табельний номер працівника'"
+        start_date: "Поле 'Дата початку відпустки'"
+        duration_days: "Поле 'Тривалість відпустки (днів)'"
 
   notice:
     create:
