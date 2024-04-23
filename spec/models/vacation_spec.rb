@@ -3,9 +3,14 @@ require 'rails_helper'
 RSpec.describe Vacation, type: :model do
   describe "validations" do
     it "is valid with valid attributes" do
-        vacation = build(:vacation)
+        vacation = build(:vacation, end_date: (Date.today + 20))
         expect(vacation).to be_valid
     end
+
+    it "is valid without end_date" do
+      vacation = build(:vacation)
+      expect(vacation).to be_valid
+  end
 
     it "is not valid without a worker" do
         vacation = build(:vacation, worker: nil)
@@ -20,6 +25,11 @@ RSpec.describe Vacation, type: :model do
     it "is not valid without a duration_days" do
         vacation = build(:vacation, duration_days: nil)
         expect(vacation).to_not be_valid
+    end
+
+    it "is not valid when start_date is greater than end_date" do
+      vacation = build(:vacation, start_date: Date.today, end_date: (Date.today-1))
+      expect(vacation).to_not be_valid
     end
   end
 
