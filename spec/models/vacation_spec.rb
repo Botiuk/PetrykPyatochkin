@@ -3,14 +3,9 @@ require 'rails_helper'
 RSpec.describe Vacation, type: :model do
   describe "validations" do
     it "is valid with valid attributes" do
-        vacation = build(:vacation, end_date: (Date.today + 20))
+        vacation = build(:vacation)
         expect(vacation).to be_valid
     end
-
-    it "is valid without end_date" do
-      vacation = build(:vacation)
-      expect(vacation).to be_valid
-  end
 
     it "is not valid without a worker" do
         vacation = build(:vacation, worker: nil)
@@ -27,8 +22,18 @@ RSpec.describe Vacation, type: :model do
         expect(vacation).to_not be_valid
     end
 
-    it "is not valid when start_date is greater than end_date" do
-      vacation = build(:vacation, start_date: Date.today, end_date: (Date.today-1))
+    it "is not valid when a duration_days is less than 1" do
+      vacation = build(:vacation, duration_days: 0)
+      expect(vacation).to_not be_valid
+    end
+
+    it "is not valid when a duration_days is not number" do
+      vacation = build(:vacation, duration_days: "Two")
+      expect(vacation).to_not be_valid
+    end
+
+    it "is not valid when a duration_days is not integer" do
+      vacation = build(:vacation, duration_days: 1.5)
       expect(vacation).to_not be_valid
     end
   end
@@ -41,6 +46,16 @@ RSpec.describe Vacation, type: :model do
       second_worker_vacation.worker = worker
       expect(first_worker_vacation.worker).to eq(worker)
       expect(second_worker_vacation.worker).to eq(worker)
+    end
+  end
+
+  describe "calculate_end_date" do
+    it "before_save" do
+        vacation = build(:vacation)
+        expect(vacation).to be_valid
+        expect(vacation.end_date).to eq(nil)
+        vacation.save
+        expect(vacation.end_date).to eq(vacation.start_date + vacation.duration_days)
     end
   end
 
