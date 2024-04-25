@@ -51,7 +51,7 @@ class VacationsController < ApplicationController
     end
 
     def update
-        if @vacation.update(vacation_params)            
+        if @vacation.update(vacation_params)
             redirect_to vacation_url(@vacation), notice: t('notice.update.vacation')
         else
             render :edit, status: :unprocessable_entity
@@ -64,7 +64,7 @@ class VacationsController < ApplicationController
             @vacation.destroy
             redirect_to worker_url(@worker), notice: t('notice.destroy.vacation')
         else
-            redirect_to worker_url(@worker), notice: t('alert.destroy.vacation')
+            redirect_to worker_url(@worker), alert: t('alert.destroy.vacation')
         end
     end
 
