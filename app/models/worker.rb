@@ -1,6 +1,6 @@
 class Worker < ApplicationRecord
-    has_many :worker_positions
-    has_many :positions, through: :worker_positions
+    has_many :worker_positions, -> { order 'worker_positions.start_date, worker_positions.end_date' }
+    has_many :positions, through: :worker_positions 
     has_one :department_worker
     has_one :department, through: :department_worker
     has_many :vacations

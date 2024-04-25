@@ -101,8 +101,8 @@ RSpec.describe Worker, type: :model do
             first_worker_position = create(:worker_position)
             second_worker_position = create(:worker_position)
             worker.worker_positions << [first_worker_position, second_worker_position]
-            expect(worker.worker_positions.first).to eq(first_worker_position)
-            expect(worker.worker_positions.second).to eq(second_worker_position)
+            expect(worker.worker_positions.unscoped.first).to eq(first_worker_position)
+            expect(worker.worker_positions.unscoped.second).to eq(second_worker_position)
         end
     end
 
