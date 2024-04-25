@@ -1,0 +1,38 @@
+<%= form_with(model: vacation) do |form| %>
+    <%= render 'shared/form_errors_messages', object: form.object %>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div>
+                <%= form.hidden_field :worker_id, value: form.object.worker_id || params[:worker_id], readonly: true %>
+            </div>
+            <% if form.object.start_date.present? %>
+                <div class="col-md-3">
+                    <b><%= t('.start_date') %></b> <%= form.object.start_date  %> <br>
+                </div>
+            <% end %>
+        </div>
+        <div class="row">
+            <% unless form.object.start_date.present? %>
+                <div class="col-md-3">
+                    <%= form.label :start_date, t('.start_date'), style: "display: block" %>
+                    <%= form.date_field :start_date, value: Date.today, min: Date.today, class: "form-control" %>
+                </div>
+            <% end %>
+
+            <div class="col-md-3">
+                <%= form.label :duration_days, t('.duration_days'), style: "display: block" %>
+                <%= form.number_field :duration_days, value: form.object.duration_days || 1, min: @vacation_pased_days || 1, max: form.object.duration_days || @vacation_days, step: 1, class: "form-control" %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mt-2">
+                <%= form.button nil, class: "btn btn-success" do %>
+                    <%= t('button.submit') %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+<% end %>

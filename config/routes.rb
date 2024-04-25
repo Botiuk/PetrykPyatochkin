@@ -8,13 +8,15 @@ Rails.application.routes.draw do
 
   get 'main/index', to: 'main#index'
   get 'workers/search', to: 'workers#search'
-  get 'worker_positions/history', to: 'worker_positions#history'  
+  get 'worker_positions/history', to: 'worker_positions#history'
+  get 'vacations/history', to: 'vacations#history'
 
   resources :workers, except: :destroy
   resources :positions, except: :destroy
   resources :worker_positions, except: [:index, :show, :destroy]
   resources :departments
   resources :department_workers, except: [:index, :show]
+  resources :vacations, except: :index
 
   # Defines the root path route ("/")
   root "main#index"

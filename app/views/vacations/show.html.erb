@@ -1,0 +1,23 @@
+<h4><%= t('.title') %> <%= @worker.last_name %> <%= @worker.first_name %> <%= @worker.middle_name %></h4>
+
+<div class="row">
+    <div class="col-12">
+        <b><%= t('.start_date') %></b> <%= I18n.l(@vacation.start_date, format: :long) %> <br>
+        <b><%= t('.end_date') %></b> <%= I18n.l(@vacation.end_date, format: :long) %> <br>
+        <b><%= t('.duration_days') %></b> <%= @vacation.duration_days %>
+    </div>
+</div>
+
+<div class="row mt-2">
+    <div class="col md-6">
+        <%= link_to t('button.show_worker'), worker_path(@worker), class: "btn btn-info" %>
+        <% if @vacation.end_date > Date.today %>
+            <%= link_to t('button.edit_vacation'), edit_vacation_path(@vacation), class: "btn btn-warning" %>
+        <% end %>
+    </div>
+    <% if @vacation.start_date > Date.today %>
+        <div class="col md-6 text-end">
+            <%= button_to t('button.delete'), @vacation, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger"%>
+        </div>
+    <% end %>
+</div>
