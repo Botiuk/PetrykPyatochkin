@@ -4,7 +4,12 @@ class DepartmentWorkersController < ApplicationController
 
     def new
         @department_worker = DepartmentWorker.new
-        @worker = Worker.find(params[:worker_id]) if params[:worker_id].present?
+        if params[:worker_id].present?
+            @worker = Worker.find(params[:worker_id]) 
+            if @worker.worker_positions.blank? || @worker.worker_positions.last.end_date.present?
+                redirect_to new_worker_position_url(worker_id: @worker.id), alert: t('alert.create.department_worker_position')
+            end
+        end
         @department = Department.find(params[:department_id]) if params[:department_id].present?
     end
 
@@ -44,9 +49,9 @@ class DepartmentWorkersController < ApplicationController
     end
 
     def destroy
-        @department = Department.find(@department_worker.department_id)
+        @worker = Worker.find(@department_worker.worker_id)
         @department_worker.destroy
-        redirect_to department_url(@department), notice: t('notice.destroy.department_worker')
+        redirect_to worker_url(@worker), notice: t('notice.destroy.department_worker')
     end
 
     private
@@ -60,7 +65,8 @@ class DepartmentWorkersController < ApplicationController
     def my_formhelper
         @departments = Department.order(:name).pluck(:name, :id)
         busy_workers = DepartmentWorker.pluck(:worker_id)
-        @free_workers = Worker.unscoped.where(date_of_fired: [nil, ""]).where.not(id: busy_workers).order(:roll_number).pluck(:roll_number, :id)
+        worker_active_position = WorkerPosition.where(end_date: nil).pluck(:worker_id)
+        @free_workers = Worker.unscoped.where(date_of_fired: [nil, ""], id: worker_active_position).where.not(id: busy_workers).order(:roll_number).pluck(:roll_number, :id)
     end
 
     def department_worker_params
