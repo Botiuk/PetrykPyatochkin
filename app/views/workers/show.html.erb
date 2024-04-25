@@ -45,6 +45,7 @@
                 <% end %>
             </table>
         </div>
+
         <% unless @worker.date_of_fired.present? %>
             <div class="table-responsive">
                 <table>
@@ -62,6 +63,28 @@
                 </table>
             </div>
         <% end %>
+
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <td><b><%= t('.vacation') %></b></td>
+                    <% if @active_vacation.present? %>
+                        <td class="px-2"><%= I18n.l(@active_vacation.start_date, format: :short) %> - <%= I18n.l(@active_vacation.end_date, format: :short) %></td>
+                        <td><%= link_to t('button.edit_vacation'), edit_vacation_path(@active_vacation), :method => :post, class: "btn btn-warning btn-sm" %></td>
+                        <% if @active_vacation.start_date > Date.today %>
+                            <td><%= button_to t('button.delete'), @active_vacation, method: :delete, data: { turbo_confirm: t('button.delete_confirm_short') }, class: "btn btn-danger btn-sm"%></td>
+                        <% end %>
+                    <% else %>
+                        <td class="px-2"><%= t('.active_vacation_empty') %></td>
+                        <% unless @worker.date_of_fired.present? %>
+                            <td><%= link_to t('button.add.vacation'), new_vacation_path(worker_id: @worker.id), :method => :post, class: "btn btn-secondary btn-sm" %></td>
+                        <% end %>
+                    <% end %>
+                    <td><%= link_to t('button.history'), vacations_history_path(worker_id: @worker.id), :method => :get, class: "btn btn-primary btn-sm" %></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
     <div class="col mt-2">
         <%= link_to t('button.all.worker'), workers_path, class: "btn btn-primary" %>

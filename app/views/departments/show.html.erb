@@ -21,7 +21,7 @@
         <% else %>
             <%= t('.manager_empty') %> <br>
         <% end %>
-        <b><%= t('.department_workers_count') %></b> <%= @workers.count %> <br>        
+        <b><%= t('.department_workers_count') %></b> <%= @workers.count %> <br>
     </div>
 </div>
 
@@ -30,10 +30,12 @@
     <div class="table-responsive">
         <table class="table align-middle table-secondary table-striped">
             <tr class="text-center">
-                <th style="width: 9%;"><%= t('.roll_number') %></th>
-                <th style="width: 23%;"><%= t('.last_name') %></th>
-                <th style="width: 22%;"><%= t('.first_name') %></th>
-                <th style="width: 22%;"><%= t('.middle_name') %></th>
+                <th style="width: 8%;"><%= t('.roll_number') %></th>
+                <th style="width: 16%;"><%= t('.last_name') %></th>
+                <th style="width: 15%;"><%= t('.first_name') %></th>
+                <th style="width: 15%;"><%= t('.middle_name') %></th>
+                <th style="width: 11%;"><%= t('.position') %></th>
+                <th style="width: 11%;"><%= t('.vacation') %></th>
                 <th style="width: 8%;"></th>
                 <th style="width: 8%;"></th>
                 <th style="width: 8%;"></th>
@@ -44,10 +46,26 @@
                 <% else %>
                     <tr id="<%= dom_id worker %>" class="text-center">
                 <% end %>
-                    <td style="width: 9%;"><%= worker.roll_number %></td>
-                    <td style="width: 23%;"><%= worker.last_name %></td>
-                    <td style="width: 22%;"><%= worker.first_name %></td>
-                    <td style="width: 22%;"><%= worker.middle_name %></td>
+                    <td style="width: 8%;"><%= worker.roll_number %></td>
+                    <td style="width: 16%;"><%= worker.last_name %></td>
+                    <td style="width: 15%;"><%= worker.first_name %></td>
+                    <td style="width: 15%;"><%= worker.middle_name %></td>
+                    <td style="width: 11%;">
+                        <% if @worker_id_active_positions.include?(worker.id) %>
+                            <%= worker.positions.last.name %>
+                        <% end %>
+                    </td>
+                    <td style="width: 11%;">
+                        <% @active_vacations.each do |active_vacation| %>
+                            <% if active_vacation.worker_id == worker.id %>
+                                <% if (active_vacation.start_date..active_vacation.end_date).to_a.include?(Date.today) %>
+                                    <b class="text-danger"><%= I18n.l(active_vacation.start_date, format: :short) %> - <%= I18n.l(active_vacation.end_date, format: :short) %></b>
+                                <% else %>
+                                    <%= I18n.l(active_vacation.start_date, format: :short) %> - <%= I18n.l(active_vacation.end_date, format: :short) %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                    </td>
                     <td style="width: 8%;">
                         <%= link_to t('button.show_worker'), worker_path(worker), class: "btn btn-info btn-sm" %>
                     </td>

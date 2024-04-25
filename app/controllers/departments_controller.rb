@@ -13,6 +13,8 @@ class DepartmentsController < ApplicationController
         department_workers_ids = DepartmentWorker.where(department_id: @department.id).pluck(:worker_id)
         @workers = Worker.where(id: department_workers_ids)
         @department_manager = Worker.joins(:department_worker).where(department_worker: {department_id: @department.id, status: "manager"}).first
+        @active_vacations = Vacation.where(worker_id: department_workers_ids).where.not('end_date < ?', Date.today)
+        @worker_id_active_positions = WorkerPosition.where(worker_id: department_workers_ids, end_date: nil).pluck(:worker_id)
     end
 
     def new

@@ -12,6 +12,7 @@ class WorkersController < ApplicationController
             @salary = Position.where(id: @worker_position.position_id).pluck(:salary).join.to_f
             @worker_salary =  (@salary * (1.012 ** ((Date.today - @worker.date_of_hired) / 365).floor)).round(2)
         end
+        @active_vacation = Vacation.active_vacation(@worker.id)
     end
 
     def new
@@ -29,7 +30,11 @@ class WorkersController < ApplicationController
 
     def edit
         if @worker.date_of_fired.present?
-            redirect_to workers_url, alert: t('alert.edit.fired_worker')
+            redirect_to worker_url(@worker), alert: t('alert.edit.fired_worker')
+        end
+        active_vacation = Vacation.active_vacation(@worker.id)
+        if active_vacation.present? && active_vacation.start_date <= Date.today && active_vacation.end_date >= Date.today
+            redirect_to worker_url(@worker), alert: t('alert.edit.vacation_worker')
         end
     end
 
@@ -41,7 +46,7 @@ class WorkersController < ApplicationController
                 redirect_to worker_url(@worker), notice: t('notice.update.worker_fired')
             else
                 redirect_to worker_url(@worker), notice: t('notice.update.worker')
-            end            
+            end
         else
             render :edit, status: :unprocessable_entity
         end
