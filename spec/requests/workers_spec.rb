@@ -38,7 +38,7 @@ RSpec.describe "Workers", type: :request do
   it "GET edit, redirect if date_of_fired.present?" do
     worker = FactoryBot.create(:worker, date_of_fired: Date.today)
     get edit_worker_path(worker)
-    expect(response).to redirect_to(workers_url)
+    expect(response).to redirect_to(worker_url(worker))
     expect(flash[:alert]).to include(I18n.t('alert.edit.fired_worker'))
   end
 

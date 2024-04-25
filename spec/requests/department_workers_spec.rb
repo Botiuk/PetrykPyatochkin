@@ -11,10 +11,26 @@ RSpec.describe "DepartmentWorkers", type: :request do
     expect(response).to be_successful
   end
 
-  it "GET new with params worker_id" do
+  it "GET new with params worker_id, worker_position present and active" do
     worker = FactoryBot.create(:worker)
+    worker_position = FactoryBot.create(:worker_position, worker: worker)
     get new_department_worker_path(worker_id: worker.id)
     expect(response).to be_successful
+  end
+
+  it "GET new with params worker_id, worker_position not active" do
+    worker = FactoryBot.create(:worker)
+    worker_position = FactoryBot.create(:worker_position, worker: worker, end_date: (Date.today - 1))
+    get new_department_worker_path(worker_id: worker.id)
+    expect(response).to redirect_to(new_worker_position_url(worker_id: worker.id))
+    expect(flash[:alert]).to include(I18n.t('alert.create.department_worker_position'))
+  end
+
+  it "GET new with params worker_id, worker_positions blank" do
+    worker = FactoryBot.create(:worker)
+    get new_department_worker_path(worker_id: worker.id)
+    expect(response).to redirect_to(new_worker_position_url(worker_id: worker.id))
+    expect(flash[:alert]).to include(I18n.t('alert.create.department_worker_position'))
   end
 
   it "GET new with params department_id" do
@@ -81,10 +97,10 @@ RSpec.describe "DepartmentWorkers", type: :request do
   end
 
   it "DELETE destroy" do
-    department = FactoryBot.create(:department)
-    department_worker = FactoryBot.create(:department_worker, department: department)
+    worker = FactoryBot.create(:worker)
+    department_worker = FactoryBot.create(:department_worker, worker: worker)
     delete department_worker_path(department_worker)
-    expect(response).to redirect_to(department_url(department))
+    expect(response).to redirect_to(worker_url(worker))
     expect(flash[:notice]).to include(I18n.t('notice.destroy.department_worker'))
   end
 end
