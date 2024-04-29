@@ -5,6 +5,7 @@
     </div>
 </div>
 
+<% if @departments.present? %>
 <div class="table-responsive">
     <table class="table align-middle table-secondary table-striped">
         <tr class="text-center">
@@ -21,6 +22,9 @@
         <% end %>
     </table>
 </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.departments_empty') %></p>
+<% end %>
 
 <% if @pagy.pages > 1 %>
     <div class="d-flex justify-content-center">

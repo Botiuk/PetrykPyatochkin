@@ -5,20 +5,24 @@
     </div>
 </div>
 
-<div class="table-responsive">
-    <table class="table align-middle table-secondary table-striped">
-        <tr class="text-center">
-            <th style="width: 40%;"><%= t('.name') %></th>
-            <th style="width: 20%;"><%= t('.salary') %>, <%= t('number.currency.format.unit') %></th>
-            <th style="width: 20%;"><%= t('.vacation_days') %></th>
-            <th style="width: 10%;"></th>
-            <th style="width: 10%;"></th>
-        </tr>
-        <% @positions.each do |position| %>
-            <%= render position %>
-        <% end %>
-    </table>
-</div>
+<% if @positions.present? %>
+    <div class="table-responsive">
+        <table class="table align-middle table-secondary table-striped">
+            <tr class="text-center">
+                <th style="width: 40%;"><%= t('.name') %></th>
+                <th style="width: 20%;"><%= t('.salary') %>, <%= t('number.currency.format.unit') %></th>
+                <th style="width: 20%;"><%= t('.vacation_days') %></th>
+                <th style="width: 10%;"></th>
+                <th style="width: 10%;"></th>
+            </tr>
+            <% @positions.each do |position| %>
+                <%= render position %>
+            <% end %>
+        </table>
+    </div>
+<% else %>
+    <p class="fw-semibold text-danger text-center"><%= t('.positions_empty') %></p>
+<% end %>
 
 <% if @pagy.pages > 1 %>
     <div class="d-flex justify-content-center">
