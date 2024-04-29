@@ -47,6 +47,16 @@ RSpec.describe "Vacations", type: :request do
     expect(flash[:alert]).to include(I18n.t('alert.new.vacation_department'))
   end
 
+  it "GET new when worker has active vacation" do
+    worker = FactoryBot.create(:worker)
+    worker_position = FactoryBot.create(:worker_position, worker_id: worker.id)
+    department_worker = FactoryBot.create(:department_worker, worker_id: worker.id)
+    vacation = FactoryBot.create(:vacation, worker_id: worker.id, duration_days: (worker_position.position.vacation_days - 5), start_date: (Date.today + 3) )
+    get new_vacation_path(worker_id: worker.id)
+    expect(response).to redirect_to(worker_url(worker))
+    expect(flash[:alert]).to include(I18n.t('alert.new.vacation_active'))
+  end
+
   it "POST create" do
     worker = FactoryBot.create(:worker)
     department_worker = FactoryBot.create(:department_worker, worker_id: worker.id)

@@ -11,6 +11,7 @@ class WorkersController < ApplicationController
         unless @worker.date_of_fired.present? || @worker_position.blank? || @worker_position.end_date.present?
             @salary = Position.where(id: @worker_position.position_id).pluck(:salary).join.to_f
             @worker_salary =  (@salary * (1.012 ** ((Date.today - @worker.date_of_hired) / 365).floor)).round(2)
+            @vacation_free_days = Vacation.worker_free_vacations_days(@worker.positions.last.vacation_days, @worker.id)
         end
         @active_vacation = Vacation.active_vacation(@worker.id)
     end

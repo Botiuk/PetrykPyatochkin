@@ -3,17 +3,21 @@ class VacationsController < ApplicationController
 
     def new
         @worker = Worker.find(params[:worker_id])
-        if @worker.department_worker.present? && @worker.worker_positions.present? && @worker.worker_positions.last.end_date.blank?
-            @vacation_days = Vacation.worker_used_vacations_days(@worker.positions.last.vacation_days, @worker.id)
-            if @vacation_days > 0
-                @vacation = Vacation.new
+        unless @worker.vacations.present? && @worker.vacations.last.end_date > Date.today
+            if @worker.department_worker.present? && @worker.worker_positions.present? && @worker.worker_positions.last.end_date.blank?
+                @vacation_days = Vacation.worker_free_vacations_days(@worker.positions.last.vacation_days, @worker.id)
+                if @vacation_days > 0
+                    @vacation = Vacation.new
+                else
+                    redirect_to worker_url(@worker), alert: t('alert.new.vacation')
+                end
+            elsif @worker.worker_positions.blank? || @worker.worker_positions.last.end_date.present?
+                redirect_to worker_url(@worker), alert: t('alert.new.vacation_position')
             else
-                redirect_to worker_url(@worker), alert: t('alert.new.vacation')
+                redirect_to worker_url(@worker), alert: t('alert.new.vacation_department')
             end
-        elsif @worker.worker_positions.blank? || @worker.worker_positions.last.end_date.present?
-            redirect_to worker_url(@worker), alert: t('alert.new.vacation_position')
         else
-            redirect_to worker_url(@worker), alert: t('alert.new.vacation_department')
+            redirect_to worker_url(@worker), alert: t('alert.new.vacation_active')
         end
     rescue ActiveRecord::RecordNotFound
         redirect_to workers_url

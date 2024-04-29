@@ -82,6 +82,20 @@
                     <% end %>
                     <td><%= link_to t('button.history'), vacations_history_path(worker_id: @worker.id), :method => :get, class: "btn btn-primary btn-sm" %></td>
                 </tr>
+                <% unless @worker.date_of_fired.present? %>
+                    <tr>
+                        <td colspan="4">
+                            <b><%= t('.vacation_free_days') %></b>
+                            <% if @vacation_free_days.present? && @vacation_free_days > 0 %>
+                                <%= @vacation_free_days %>
+                            <% elsif @vacation_free_days.present? && @vacation_free_days <= 0 %>
+                                0
+                            <% else %>
+                                <%= t('.vacation_free_days_empty') %>
+                            <% end %>
+                        </td>
+                    </tr>
+                <% end %>
             </table>
         </div>
 
