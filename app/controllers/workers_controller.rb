@@ -3,6 +3,7 @@ class WorkersController < ApplicationController
 
     def index
         @pagy, @workers = pagy(Worker.all, items: 20)
+        @active_workers = Worker.where(date_of_fired: nil).count
     end
 
     def show

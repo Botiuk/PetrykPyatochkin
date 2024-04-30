@@ -1,5 +1,5 @@
 <div class="row mb-2">
-    <div class="col"><h4><%= t('.title') %></h4></div>
+    <div class="col"><h4><%= t('.title') %> (<%= t('.active_workers') %> <%= @active_workers %>)</h4></div>
     <div class="col text-end">
         <%= link_to t('button.add.worker'), new_worker_path, :method => :post, class: "btn btn-secondary" %>
     </div>

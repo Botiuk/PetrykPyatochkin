@@ -162,6 +162,7 @@ uk:
   workers:
     index:
       title: "Працівники"
+      active_workers: "загалом активних:"
       roll_number: "Табельний номер"
       last_name: "Прізвище"
       first_name: "Ім'я"
