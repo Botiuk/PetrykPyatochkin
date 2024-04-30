@@ -1,3 +1,6 @@
-<h4><%= t('.title_one') %> <%= @worker_position.worker.last_name %> <%= @worker_position.worker.first_name %> <%= @worker_position.worker.middle_name %> <%= t('.title_two') %> "<%= @worker_position.position.name %>"</h4>
+<h4>
+    <%= t('.title_one') %> <%= @worker_position.worker.last_name %> <%= @worker_position.worker.first_name %> <%= @worker_position.worker.middle_name %> <%= t('.title_two') %> "<%= @worker_position.position.name %>"
+    <%= link_to t('button.show_worker'), worker_path(@worker_position.worker.id), class: "btn btn-info" %>
+</h4>
 
 <%= render "form", worker_position: @worker_position %>
