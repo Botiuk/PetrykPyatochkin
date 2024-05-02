@@ -131,7 +131,7 @@ uk:
 
   main:
     index:
-      department_without_manager: "Потрібно призначити керівників в наступних відділах:"      
+      department_without_manager: "Потрібно призначити керівника відділу:"      
       birthday: "День народження:"
       anniversary: "Річниця роботи:"
       years: "р."

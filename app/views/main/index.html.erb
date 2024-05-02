@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
     <% if @departments_without_managers.present? %>
         <div class="row">
-            <div class="col-12 text-center text-danger"><h5><%= t('.department_without_manager') %></h5></div>
+            <div class="col-12 text-danger"><h5><%= t('.department_without_manager') %></h5></div>
             <% @departments_without_managers.each do |department_without_manager| %>
                 <div id="<%= dom_id department_without_manager %>" class="col-sm-3 p-1">
                     <div class="card text-bg-light">

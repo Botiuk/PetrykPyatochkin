@@ -83,6 +83,11 @@ when "development"
         end
     end
 
+    (1..18).each do |department_id|
+        department_manager = DepartmentWorker.where(department_id: department_id).first
+        department_manager.update(status: "manager")
+    end
+
     worker_with_department_ids = DepartmentWorker.pluck(:worker_id)
     worker_with_department_ids.each do |worker_with_department_id|
         Vacation.create(
