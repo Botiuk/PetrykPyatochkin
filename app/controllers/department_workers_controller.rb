@@ -51,6 +51,13 @@ class DepartmentWorkersController < ApplicationController
     def destroy
         @worker = Worker.find(@department_worker.worker_id)
         @department_worker.destroy
+        active_vacation = Vacation.active_vacation(@department_worker.worker_id)
+        if active_vacation.present? && active_vacation.start_date <= Date.today && active_vacation.end_date >= Date.today
+            active_vacation.update(duration_days: (Date.today - active_vacation.start_date).to_i, end_date: Date.today)
+        end
+        if active_vacation.present? && active_vacation.start_date > Date.today
+            active_vacation.destroy
+        end
         redirect_to worker_url(@worker), notice: t('notice.destroy.department_worker')
     end
 

@@ -45,6 +45,8 @@ class WorkersController < ApplicationController
             if @worker.date_of_fired.present?
                 department_worker = DepartmentWorker.where(worker_id: @worker.id).first
                 department_worker.destroy if department_worker.present?
+                active_vacation = Vacation.active_vacation(@worker.id)
+                active_vacation.destroy if active_vacation.present?
                 redirect_to worker_url(@worker), notice: t('notice.update.worker_fired')
             else
                 redirect_to worker_url(@worker), notice: t('notice.update.worker')

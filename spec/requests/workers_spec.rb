@@ -42,6 +42,14 @@ RSpec.describe "Workers", type: :request do
     expect(flash[:alert]).to include(I18n.t('alert.edit.fired_worker'))
   end
 
+  it "GET edit, redirect if he now in vacation" do
+    worker = FactoryBot.create(:worker)
+    active_vacation = FactoryBot.create(:vacation, worker: worker, start_date: Date.today)
+    get edit_worker_path(worker)
+    expect(response).to redirect_to(worker_url(worker))
+    expect(flash[:alert]).to include(I18n.t('alert.edit.vacation_worker'))
+  end
+
   it "PUT update" do
     worker = FactoryBot.create(:worker, last_name: "Smith")
     put worker_path(worker), params: { worker: {last_name: "Do"} }
@@ -56,6 +64,13 @@ RSpec.describe "Workers", type: :request do
     expect(worker.reload.date_of_fired).to eq(Date.today)
     expect(response).to redirect_to(worker_url(worker))
     expect(flash[:notice]).to include(I18n.t('notice.update.worker_fired'))
+  end
+
+  it "PUT update when worker fired, destroy future vacation" do
+    worker = FactoryBot.create(:worker, last_name: "Smith")
+    active_vacation = FactoryBot.create(:vacation, worker: worker, start_date: (Date.today + 1))
+    put worker_path(worker), params: { worker: {date_of_fired: Date.today} }
+    expect {active_vacation.reload}.to raise_error(ActiveRecord::RecordNotFound)
   end
 
   it "GET search" do

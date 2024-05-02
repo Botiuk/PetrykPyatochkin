@@ -103,4 +103,21 @@ RSpec.describe "DepartmentWorkers", type: :request do
     expect(response).to redirect_to(worker_url(worker))
     expect(flash[:notice]).to include(I18n.t('notice.destroy.department_worker'))
   end
+
+  it "DELETE destroy with active vacation" do
+    worker = FactoryBot.create(:worker)
+    department_worker = FactoryBot.create(:department_worker, worker: worker)
+    active_vacation = FactoryBot.create(:vacation, worker: worker, start_date: (Date.today - 3), duration_days: 10)
+    delete department_worker_path(department_worker)
+    expect(active_vacation.reload.end_date).to eq(Date.today)
+    expect(active_vacation.reload.duration_days).to eq(3)
+  end
+
+  it "DELETE destroy with future vacation" do
+    worker = FactoryBot.create(:worker)
+    department_worker = FactoryBot.create(:department_worker, worker: worker)
+    active_vacation = FactoryBot.create(:vacation, worker: worker, start_date: (Date.today + 1))
+    delete department_worker_path(department_worker)
+    expect {active_vacation.reload}.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end
