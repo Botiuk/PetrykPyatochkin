@@ -1,4 +1,5 @@
 class VacationsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_vacation, only: %i[ show edit update destroy ]
 
     def new

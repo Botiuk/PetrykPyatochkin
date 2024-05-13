@@ -1,4 +1,5 @@
 class WorkerPositionsController < ApplicationController
+    before_action :authenticate_user!
     before_action :set_worker_position, only: %i[ edit update ]
     before_action :positions_formhelper, only: %i[ new create edit ]
 

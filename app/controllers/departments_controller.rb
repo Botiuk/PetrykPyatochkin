@@ -1,5 +1,6 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: %i[ show edit update destroy ]
+    before_action :authenticate_user!
+    before_action :set_department, only: %i[ show edit update destroy ]
 
     def index
         @pagy, @departments = pagy(Department.all.order(:name), items: 20)
