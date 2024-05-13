@@ -9,6 +9,13 @@ when "development"
         password_confirmation: ENV['SEEDS_PASS']
     )
 
+    admin = AdminUser.where(email: "svetabotiuk@gmail.com").first_or_initialize
+    admin.update!(
+        email: 'svetabotiuk@gmail.com', 
+        password: ENV['SEEDS_PASS'], 
+        password_confirmation: ENV['SEEDS_PASS']
+    )
+
     100.times do
         Worker.create(
             roll_number: Faker::Number.unique.within(range: 1..10000),
@@ -105,4 +112,10 @@ when "production"
         password_confirmation: ENV['SEEDS_PASS']
     )
 
+    admin = AdminUser.where(email: "svetabotiuk@gmail.com").first_or_initialize
+    admin.update!(
+        email: 'svetabotiuk@gmail.com', 
+        password: ENV['SEEDS_PASS'], 
+        password_confirmation: ENV['SEEDS_PASS']
+    )
 end

@@ -51,6 +51,7 @@ gem 'rails-i18n'
 # Authorization
 gem "devise", "~> 4.9"
 gem 'devise-i18n'
+gem 'activeadmin'
 
 # Styles
 gem 'dartsass-sprockets'
