@@ -2,7 +2,7 @@
 
 App for facilitating personnel accounting at the enterprise. Information about positions and departments of enterprise, personal card for each worker, managing worker's vacations.
 
-Built with: Rails 7.1.3, Ruby 3.2.2, postgres, Turbo, Stimulus, Bootstrap, Cloudinary, devise.
+Built with: Rails 7.1.3, Ruby 3.2.2, postgres, Turbo, Stimulus, Bootstrap, Cloudinary, devise, ActiveAdmin.
 
 Test with: RSpec, factory_bot_rails and faker.
 
@@ -10,7 +10,7 @@ My native language is Ukrainian and this is a single language on app. But all in
 
 Petryk Pyatochkin - is the main hero of the short Ukrainian animation film "How Petryk Pyatochkin counted elephants", which was realized in 1984 and became a cult for children in this period.
 
-In this app, to receive access to company information, you need to enter your email address and password. There is no registration, the user or users is created through db:seeds.
+In this app, to receive access to company information, you need to enter your email address and password. There is no registration. The user or users is created through db:seed. After that, you can create new users or delete/change old, through the administrator panel.
 
 The application stores information about all the departments in the company. Their abbreviation, name, who is the manager, and how many employees they have. More than 20 people cannot work in one department at the same time. The department is created without a manager, because he is also its employee, and employees are added to it later.  In order not to forget, in which departments there is no manager, this is highlighted in red text on the main page, the department page, and the personal page of the department. In the list of departments, in addition to the abbreviation and name, there is information about the manager and the number of employees. On the department's page, information about the names of its employees, their positions, and current active vacation is available. The manager role is defined when adding a new employee to a department or editing an existing one, but he will only become a manager if there is no manager in the department. To change the current manager, it is necessary to demote him to the level of an ordinary employee or remove him from the department. When deleting a department, all its employees are deleted from it.
 

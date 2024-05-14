@@ -22,14 +22,19 @@
           <% end %>
         </ul>
       <% end %>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            <% if user_signed_in? %>
-                <%= button_to t('navigation.logout'), destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "btn  btn-outline-secondary" %>
-            <% else %>
-                <%= link_to t('navigation.login'), new_user_session_path, class: "btn btn-outline-secondary" %>
-            <% end %>
-        </li>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">        
+        <% if user_signed_in? %>
+          <li class="me-2 my-auto fw-lighter">
+            <%= current_user.email %> 
+          </li>
+          <li class="nav-item">
+          <%= button_to t('navigation.logout'), destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "btn  btn-outline-secondary" %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to t('navigation.login'), new_user_session_path, class: "btn btn-outline-secondary" %>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
