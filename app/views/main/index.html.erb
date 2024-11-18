@@ -15,6 +15,21 @@
         </div>
     <% end %>
 
+    <% if @workers_without_department.present? %>
+        <div class="row">
+            <div class="col-12 text-danger"><h5><%= t('.workers_without_department') %></h5></div>
+            <% @workers_without_department.each do |worker_without_department| %>
+                <div class="col-sm-3 p-1">
+                    <div class="card text-bg-light">
+                        <div class="card-body">
+                            <%= render 'worker_short', worker: worker_without_department %>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    <% end %>
+
     <div class="row">
         <h5><%= t('.birthday') %></h5>
         <% if @birthday_workers.present? %>
