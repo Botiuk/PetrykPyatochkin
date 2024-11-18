@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WorkerPosition < ApplicationRecord
   belongs_to :worker
   belongs_to :position

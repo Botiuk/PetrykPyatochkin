@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWorkerPositions < ActiveRecord::Migration[7.1]
   def change
     create_table :worker_positions do |t|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -6,7 +8,7 @@ Rails.application.routes.draw do
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   get 'main/index', to: 'main#index'
   get 'workers/search', to: 'workers#search'
@@ -15,13 +17,13 @@ Rails.application.routes.draw do
 
   resources :workers, except: :destroy
   resources :positions, except: :destroy
-  resources :worker_positions, except: [:index, :show, :destroy]
+  resources :worker_positions, except: %i[index show destroy]
   resources :departments
-  resources :department_workers, except: [:index, :show]
+  resources :department_workers, except: %i[index show]
   resources :vacations, except: :index
 
   # Defines the root path route ("/")
-  root "main#index"
+  root 'main#index'
 
   match '*unmatched', to: 'application#page_not_found', via: :all
 end

@@ -1,5 +1,7 @@
-class Department < ApplicationRecord
-    has_many :department_workers, dependent: :destroy
+# frozen_string_literal: true
 
-    validates :abbreviation, :name, presence: true, uniqueness: { case_sensitive: false }
+class Department < ApplicationRecord
+  has_many :department_workers, dependent: :destroy
+
+  validates :abbreviation, :name, presence: true, uniqueness: { case_sensitive: false }
 end
