@@ -10,7 +10,7 @@ class Worker < ApplicationRecord
 
   has_one_attached :worker_photo
 
-  validates :roll_number, presence: true, uniqueness: { case_sensitive: false }
+  validates :roll_number, presence: true, uniqueness: true
   validates :last_name, :first_name, :middle_name, :passport, :date_of_birth, :place_of_birth, :home_adress,
             :date_of_hired, presence: true
   validates :date_of_fired, comparison: { greater_than_or_equal_to: :date_of_hired }, allow_blank: true

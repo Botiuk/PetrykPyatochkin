@@ -75,22 +75,25 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_13_071926) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["department_id"], name: "index_department_workers_on_department_id"
-    t.index ["worker_id"], name: "index_department_workers_on_worker_id"
+    t.index ["worker_id"], name: "index_department_workers_on_worker_id", unique: true
   end
 
   create_table "departments", force: :cascade do |t|
-    t.string "abbreviation"
-    t.string "name"
+    t.string "abbreviation", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((abbreviation)::text)", name: "index_departments_on_lower_abbreviation", unique: true
+    t.index "lower((name)::text)", name: "index_departments_on_lower_name", unique: true
   end
 
   create_table "positions", force: :cascade do |t|
-    t.string "name"
-    t.decimal "salary", precision: 10, scale: 2
-    t.integer "vacation_days"
+    t.string "name", null: false
+    t.decimal "salary", precision: 10, scale: 2, null: false
+    t.integer "vacation_days", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "lower((name)::text)", name: "index_positions_on_lower_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -127,18 +130,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_13_071926) do
   end
 
   create_table "workers", force: :cascade do |t|
-    t.integer "roll_number"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "middle_name"
-    t.string "passport"
-    t.date "date_of_birth"
-    t.text "place_of_birth"
-    t.text "home_adress"
-    t.date "date_of_hired"
+    t.integer "roll_number", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "middle_name", null: false
+    t.string "passport", null: false
+    t.date "date_of_birth", null: false
+    t.text "place_of_birth", null: false
+    t.text "home_adress", null: false
+    t.date "date_of_hired", null: false
     t.date "date_of_fired"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["roll_number"], name: "index_workers_on_roll_number", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

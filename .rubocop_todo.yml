@@ -2,13 +2,6 @@ Layout/LineLength:
   Exclude:
     - 'config/initializers/devise.rb'
 
-Rails/UniqueValidationWithoutIndex:
-  Exclude:
-    - 'app/models/position.rb'
-    - 'app/models/department_worker.rb'
-    - 'app/models/department.rb'
-    - 'app/models/worker.rb'
-
 Metrics/AbcSize:
   Exclude:
     - 'db/migrate/20240328182313_create_active_storage_tables.active_storage.rb'
@@ -35,6 +28,5 @@ RSpec/ExampleLength:
     - 'spec/models/vacation_spec.rb'
     - 'spec/models/worker_position_spec.rb'
     - 'spec/requests/department_workers_spec.rb'
-    - 'spec/requests/vacations_spec.rb'
     - 'spec/requests/vacations_spec.rb'
     - 'spec/requests/worker_positions_spec.rb'
